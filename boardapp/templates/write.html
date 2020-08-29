@@ -1,50 +1,18 @@
 {%extends 'base.html'%}
 {% block contents %}
+{%load static%}
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-        body{
-            margin-top: 60px;
-            font-size: 16px;
-        }
-        #write{
-            font-size: 16px;
-        }
-    </style>
-</head>
+    <link rel="stylesheet" href="{% static 'boardapp/write.css' %}">
 <script>
-
     function cancle_confirm(url) {
         var cancle = confirm('글 작성을 취소할까요?');
         if(cancle == true){
-            location =url;
+            location = url;
         }
     }
 </script>
-<style>
-    .table_th {
-        width: 120px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    #title{
-    font-family: 'YESGothic-Regular';
-    margin-top: 25px;
-    margin-left:70px;
-    color:white;
-    }
-    .aside{
-    margin-left:0px;
-    height:90px;
-    background-color:darkslategray;
-    }
-    .custom-select{
-        width:24%;
-        height:40px;
-        font-size:16px;
-    }
-</style>
-
+</head>
 <body>
     <div class="container">
         <!-- <form method="POST">
@@ -112,7 +80,7 @@
             </table>
             <div style="float: right;">
 
-                <a  href="javascript:cancle_confirm({%url 'board'%})" ><span class="btn btn-outline-dark" id="write">취소하기</span></a>
+                <a  href="javascript:cancle_confirm({%url 'dataroom'%})" ><span class="btn btn-outline-dark" id="write">취소하기</span></a>
                 <input class="btn btn-outline-dark" id="write" type="submit" value="제출하기">
             </div>
         </form>
