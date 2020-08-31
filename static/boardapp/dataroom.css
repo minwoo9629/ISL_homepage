@@ -34,7 +34,7 @@ table.type09 {
     border-collapse: collapse;
     text-align: left;
     line-height: 1.5;
-
+    width:100%;
 }
 table.type09 thead th {
     padding: 10px 20px;
@@ -45,7 +45,7 @@ table.type09 thead th {
 }
 
 table.type09 td {
-    width: 350px;
+    width: 700px;
     padding: 20px;
     vertical-align: top;
     border-bottom: 1px solid #ccc;
@@ -57,22 +57,14 @@ table.type09 td {
     color:white;
 }
 .search{
-    width:500px;
     height:30px;
     margin:0px 55px;  
     padding:50px;
 }
 .aside{
-    margin-left:400px;
-    width:1110px;
+    width:100%;
     height:140px;
     background-color:darkslategray;
-}
-section{
-    margin-top:30px;
-    width:1300px;
-    position:absolute;
-    margin-left:305px
 }
 .page-link{
     color:darkslategray;

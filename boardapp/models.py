@@ -19,21 +19,11 @@ class DjangoBoard(models.Model,HitCountMixin):
           self.hits = self.hits + 1
           self.save()
 
-class SubBoard(models.Model):
-    subname = models.CharField(max_length=50, blank=True)
-
-    def __str__(self):
-        return self.subname
-
-class DataroomBoard(models.Model):
-    sub = models.CharField(max_length=50, blank=True)
-    item = models.CharField(max_length=10)
-    name = models.CharField(max_length=50, blank=True)
-    year = models.DateField()
-
 class DataRoom(models.Model):
-    sub = models.CharField(max_length=50, blank=True)
+    subject = models.CharField(max_length=50, blank=True)
+    professor = models.CharField(max_length=10,blank=True)
     item = models.CharField(max_length=10)
     title = models.CharField(max_length=50, blank=True)
     year = models.DateField()
-    name = models.CharField(max_length=50, blank=True)
+    author = models.CharField(max_length=50, blank=True)
+    

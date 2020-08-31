@@ -1,6 +1,6 @@
 import math
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import DjangoBoard, SubBoard, DataRoom
+from .models import DjangoBoard,  DataRoom
 # from .forms import NewDjangoBoard
 from django.utils import timezone
 from django.core.paginator import Paginator
@@ -8,42 +8,34 @@ from django.core.paginator import Paginator
 def board(request):
     return render(request,'board.html')
 
-def subject(request):
-    subboard = SubBoard.objects.all() 
-    return render(request,'Subject.html', {'subboard':subboard})
-
-def sub_insert(request):
-    if request.method == 'POST':
-        subboard = SubBoard()
-        subboard.subname = request.POST['subname']
-        subboard.save()
-        return redirect('/Subject/')
-
 def dataroom(request):
-    boards = DataRoom.objects
-    
-    board_list = DataRoom.objects.all().order_by('-id')
-    # 게시판 모든 글들을 대상으로 한다.
-    num = 5
-    paginator = Paginator(board_list, num)
-    # 게시판 객체 num 개를 한 페이지로 자른다.
-    board_page = request.GET.get('page')
-    # request된 페이지를 변수에 담는다.
-    post = paginator.get_page(board_page) 
-    # request된 페이지를 얻어온 뒤 post에 저장
+    #if request.method == 'GET' :
+        
+        board_list = DataRoom.objects.all().order_by('-id')
+        # 게시판 모든 글들을 대상으로 한다.
+        num = 5
+        paginator = Paginator(board_list, num)
+        # 게시판 객체 num 개를 한 페이지로 자른다.
+        board_page = request.GET.get('page')
+        # request된 페이지를 변수에 담는다.
+        post = paginator.get_page(board_page) 
+        # request된 페이지를 얻어온 뒤 post에 저장
+        page_numbers_range = 5
+        #화면에 보여줄 페이지 번호 갯수
+        max_index = len(paginator.page_range)
+        current_page = int(board_page) if board_page else 1
+        start_index = int((current_page - 1) / page_numbers_range) * page_numbers_range
+        end_index = start_index + page_numbers_range
+        if end_index >= max_index:
+            end_index = max_index
 
-    page_numbers_range = 5
-    #화면에 보여줄 페이지 번호 갯수
-    max_index = len(paginator.page_range)
-    current_page = int(board_page) if board_page else 1
-    start_index = int((current_page - 1) / page_numbers_range) * page_numbers_range
-    end_index = start_index + page_numbers_range
-    if end_index >= max_index:
-        end_index = max_index
+        page_range = paginator.page_range[start_index:end_index]    
+        
+        boards = DataRoom.objects.all().values('subject','professor').distinct()
+        return render(request, 'dataroom.html', { 'post':post,'page_range':page_range,'board_list':boards}) 
+    #elif request.method == 'POST':
 
-    page_range = paginator.page_range[start_index:end_index]    
-    
-    return render(request, 'dataroom.html', {'boards':boards, 'post':post,'page_range':page_range,'board_list':board_list})
+      #  return render(request, 'dataroom.html')
 
 
 # def create(request):
@@ -69,7 +61,8 @@ def dataroom(request):
 
 def create(request):
     dataroom = DataRoom()
-    dataroom.sub = request.GET['sub']
+    dataroom.subject = request.GET['subject']
+    dataroom.professor = request.GET['professor']
     dataroom.item = request.GET['item']
     dataroom.title = request.GET['title']
     dataroom.year = request.GET['year']

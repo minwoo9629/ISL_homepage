@@ -17,7 +17,7 @@ html,
 
 h4{float:left;}
 
-nav{
+#mainNav{
     background:white;
     height:54px;
     border-bottom: 1px solid gray;

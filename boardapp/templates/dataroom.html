@@ -2,144 +2,191 @@
 {% block contents %}
 {% load static %}
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{% static 'boardapp/dataroom.css' %}">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="{% static 'boardapp/dataroom.css' %}">
+  <style>
+    .modal-title {
+      font-weight: bold;
+      font-size: 20px;
+      padding: 10px;
+    }
+
+    .item-modal {
+      margin-top: 10px;
+    }
+
+    .modal-content {
+      font-family: 'YESGothic-Regular';
+    }
+
+    .modal-body {
+      height: 400px;
+    }
+    #Search-subject{
+      margin-top:10px;
+    }
+    .aside{
+    margin-left:200px;
+    width:80%;
+    height:140px;
+    background-color:darkslategray;
+    }
+
+    table.type09 {
+      margin-left:200px;
+      width:80%;
+    }
+    .search{
+      height:50px;
+      margin:0px 190px;  
+      padding:30px 20px;
+    }
+    #write{
+      margin-left:200px;
+      margin-top:10px;
+    }
+  </style>
 </head>
+
 <body>
-    <div class="dataroom">
-        <div class="aside">
-        <h4 id="title">자료실</h4>
-        </div>
-    <section>
-        <article>
-    <div> 
-        <box class="search">
-        <span class="name">과목선택
-            <input class="subject" type="text" disabled tabindex="-1">
-            <button class="icon" id="Search" style="background-color: white;" data-toggle="modal" data-target="#search"><i class="fa fa-search" style="border:none;"aria-hidden="true"></i></button>
-            <button class="icon" style="background-color: white;" data-toggle="modal" data-target="#plus"><i class="fa fa-plus" aria-hidden="true"></i></button> 
-        </span>
-        <span class="input-group-sm mb-1">항목
-            <select class="custom-select" id="inputGroup-sizing-sm" style="width:100px; height:35px; font-size:15px;">
-              <option value="1">중간</option>
-              <option value="2">기말</option>
-              <option value="3">과제</option>
-            </select>
-        </span>
-        <span class="name">년도
-            <input class="item" type="text">
-        </span>
-        <span class="name">제목
-            <input class="item" type="text">
-        </span>
-        <button type="submit" class="btn btn-light btn-sm" id="submit" style="margin-right:95px;">조회</button>
-            </box>
+  <div class="dataroom">
+    <div class="aside">
+      <h4 id="title">자료실</h4>
     </div>
-    </article>
-    <article>
-    <div class="container" id="board" style="margin-top:30px;">
-        <table class="type09">
+    <section>
+      <article>
+        <div class="search">
+            <span class="name">과목선택
+              <input class="subject" type="text" disabled tabindex="-1">
+              <input class="professor" type="text" disabled tabindex="-1">
+              <button class="icon" id="Search" style="background-color: white;" data-toggle="modal"
+                data-target="#search"><i class="fa fa-search" style="border:none;" aria-hidden="true"></i></button>
+            </span>
+            <span class="input-group-sm mb-1">항목
+              <select class="custom-select" id="inputGroup-sizing-sm" style="width:100px; height:35px; font-size:15px;">
+                <option value="all">전체</option>
+                <option value="middle">중간</option>
+                <option value="final">기말</option>
+                <option value="homework">과제</option>
+
+              </select>
+            </span>
+            <span class="name">년도
+              <input class="item" type="text">
+            </span>
+            <span class="name">제목
+              <input class="item" type="text">
+            </span>
+            <button type="submit" class="btn btn-light btn-sm" id="submit" style="margin-left:40px;">조회</button>
+        </div>
+      </article>
+      <article>
+        <div id="board" style="margin-top:30px;">
+          <table class="type09">
             <thead>
-                <tr>
-                    <th scope="cols">과목</th>
-                    <th scope="cols">항목</th>
-                    <th scope="cols">제목</th>
-                    <th scope="cols">년도</th>
-                    <th scope="cols">작성자</th>
-                </tr>
+              <tr>
+                <th scope="cols">과목</th>
+                <th scope="cols">교수</th>
+                <th scope="cols">항목</th>
+                <th scope="cols">제목</th>
+                <th scope="cols">년도</th>
+                <th scope="cols">작성자</th>
+              </tr>
             </thead>
             <tbody>
-                {% for board in post %}
-                <tr>
-                    <td><a style="color:black;" href="{% url 'detail' board.id%}">{{board.sub}}</a></td>
-                    <td>{{board.item}}</td>
-                    <td><a style="color:black;" href="{% url 'detail' board.id%}">{{board.title}}</a>{{board.comments.count}}</td>
-                    <td>{{board.year}}</td>
-                    <td>{{board.name}}</td>
-                </tr>
-                {%endfor%}
+              {% for board in post %}
+              <tr>
+                <td><a style="color:black;" href="{% url 'detail' board.id%}">{{board.subject}}</a></td>
+                <td>{{board.professor}}</td>
+                <td>{{board.item}}</td>
+                <td><a style="color:black;"
+                    href="{% url 'detail' board.id%}">{{board.title}}</a></td>
+                <td>{{board.year.year}}</td>
+                <td>{{board.author}}</td>
+              </tr>
+              {%endfor%}
             </tbody>
-        </table>
-        <hr>
-        <div class="container">
-            <a href="{% url 'write' %}" class="btn btn-outline-dark" id="write" role="button" aria-pressed="true">글쓰기</a>
+          </table>
+          <div>
+            <a href="{% url 'write' %}" class="btn btn-outline-dark" id="write" role="button"
+              aria-pressed="true">글쓰기</a>
             <br><br>
             <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <a class="page-link" href="?page=1"><<</a>
+              <ul class="pagination justify-content-center">
+                <a class="page-link" href="?page=1">
+                  <<</a>
                     {%if post.has_previous%}
-                    <a class="page-link" href="?page={{post.previous_page_number}}"><</a>
-                    {% else %}
-                    <a class="page-link" href="#"><</a>
-                    {%endif%}
-                    {% for page in page_range%}
-                    {%if page == post.number%}
-                    <li class="page-item active" aria-current="page" {% if page == post.number %}class="active"
-                        {% endif %}>
-                        <a class="page-link" href="?page={{page}}">{{page}}<span class="sr-only">(current)</span></a>
-                    </li>
-                    {%else%}
-                    <li class="page-item" {% if page == post.number %}class="active" {% endif %}>
-                        <a class="page-link" href="?page={{page}}">{{page}}</a>
-                    </li>
-                    {%endif%}
+                    <a class="page-link" href="?page={{post.previous_page_number}}">
+                      <</a>
+                        {% else %}
+                        <a class="page-link" href="#">
+                          <</a>
+                            {%endif%}
+                            {% for page in page_range%}
+                            {%if page == post.number%}
+                            <li class="page-item active" aria-current="page" {% if page == post.number %}class="active"
+                              {% endif %}>
+                              <a class="page-link" href="?page={{page}}">{{page}}<span
+                                  class="sr-only">(current)</span></a>
+                            </li>
+                            {%else%}
+                            <li class="page-item" {% if page == post.number %}class="active" {% endif %}>
+                              <a class="page-link" href="?page={{page}}">{{page}}</a>
+                            </li>
+                            {%endif%}
 
-                    {% endfor %}
-                    {%if post.has_next%}
-                    <a class="page-link" href="?page={{post.next_page_number}}">></a>
-                    {%else%}
-                    <a class="page-link" href="#">></a>
-                    {%endif%}
-                    <a class="page-link" href="?page={{post.paginator.num_pages}}">>></a>
-                    </ul>
-                </nav>
+                            {% endfor %}
+                            {%if post.has_next%}
+                            <a class="page-link" href="?page={{post.next_page_number}}">></a>
+                            {%else%}
+                            <a class="page-link" href="#">></a>
+                            {%endif%}
+                            <a class="page-link" href="?page={{post.paginator.num_pages}}">>></a>
+              </ul>
+            </nav>
 
-            </div>
+          </div>
         </div>
-        </article>
+      </article>
     </section>
-</div>
+  </div>
 
- <!-- Modal -->
- <div class="modal fade" id="search" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!-- Modal -->
+  <div class="modal fade" id="search" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLabel">과목 검색</h5>
+          <input class="item-modal" type="text" name="subname">
+          <button class="icon" id="Search-subject" style="background-color: white;" data-toggle="modal"
+          data-target="#search"><i class="fa fa-search" style="border:none;" aria-hidden="true"></i></button>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          ...
+          <table class="table table-striped">
+            <thead>
+              <th>과목명</th>
+              <th>교수</th>
+              <th>선택</th>
+            </thead>
+            <tbody>
+              {%for board in board_list%}
+              <tr>
+                <td>{{board.subject}}</td>
+                <td>{{board.professor}}</td>
+                <td><input name='board' type="radio"></td>
+              </tr>
+              {%endfor%}
+            </tbody>
+          </table>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-primary btn-sm">선택</button>
+          <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">취소</button>
         </div>
       </div>
     </div>
   </div>
-
- <!-- Modal -->
- <div class="modal fade" id="plus" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</body>
 {% endblock %}
