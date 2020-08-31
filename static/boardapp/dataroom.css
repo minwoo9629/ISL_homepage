@@ -76,4 +76,16 @@ section{
 }
 .page-link{
     color:darkslategray;
+    background-color:white;
+}
+.modal-title{
+    font-weight: bold;
+    font-size:20px;
+    padding:10px;
+}
+.item-modal{
+    margin-top:10px;
+}
+.modal-content{
+    font-family: 'YESGothic-Regular';
 }
