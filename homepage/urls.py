@@ -7,20 +7,23 @@ import mainapp.views
 import boardapp.views
 import loginapp.views
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',mainapp.views.home, name="home"),
-    path('board/',boardapp.views.board, name="board"),
+    path('board/', boardapp.views.board, name="board"),
+    path('dataroom/', boardapp.views.dataroom, name="dataroom"),
     path('write', boardapp.views.write, name="write"),
     path('create', boardapp.views.create, name="create"),
-    path('board/<int:board_id>/',boardapp.views.detail,name="detail"),
-    path('update/<int:board_id>/',boardapp.views.update,name="update"),
+    path('dataroom/<int:board_id>/',boardapp.views.detail,name="detail"),
+    path('edit/<int:board_id>/',boardapp.views.edit,name="edit"),
     path('delete/<int:board_id>/',boardapp.views.delete,name="delete"),
     path('sign_up',loginapp.views.sign_up,name="sign_up"),
     path('sign_in',loginapp.views.sign_in,name="sign_in"),
     path('logout',loginapp.views.logout, name="logout"),
     path('dataroom/', boardapp.views.dataroom, name="dataroom"),
     path('download/<int:pk>', boardapp.views.file_download, name="file_download"),
+    path('search/', boardapp.views.search, name="search"),
     # path('accounts/',include('allauth.urls')),
 ]
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

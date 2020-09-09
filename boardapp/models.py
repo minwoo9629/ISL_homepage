@@ -12,10 +12,12 @@ def get_file_path(instance,filename):
     return '/'.join(['upload_file/', ymd_path, uuid_name])
 
 class DjangoBoard(models.Model,HitCountMixin):
-      subject = models.CharField(max_length=50, null=True)
-      content = models.CharField(max_length=50, null=True)
+      subject = models.CharField(max_length=50, null=True, verbose_name="과목")
+      professor = models.CharField(max_length=10, null=True, verbose_name="교수")
+      item = models.CharField(max_length=10, null=True, verbose_name="항목")
+      title = models.CharField(max_length=50, null=True, verbose_name="글 제목")
       author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-      created_date = models.DateField('date_published')
+      year = models.IntegerField()
       hits = models.IntegerField(default=0)
       upload_files = models.FileField(upload_to=get_file_path, null=True, blank=True)
       filename = models.CharField(max_length=64, null=True, verbose_name="파일 이름")
@@ -28,3 +30,14 @@ class DjangoBoard(models.Model,HitCountMixin):
       def hit_update_counter(self):
           self.hits = self.hits + 1
           self.save()
+
+# class DataRoom(models.Model):
+#     subject = models.CharField(max_length=50, blank=True, verbose_name="과목")
+#     professor = models.CharField(max_length=10,blank=True, verbose_name="교수")
+#     item = models.CharField(max_length=10, verbose_name="항목")
+#     title = models.CharField(max_length=50, blank=True, verbose_name="글 제목")
+#     year = models.DateField()
+#     author = models.CharField(max_length=50, blank=True, verbose_name="글 작성자")
+#     upload_files = models.FileField(upload_to=get_file_path, null=True, blank=True)
+#     filename = models.CharField(max_length=64, null=True, verbose_name="파일 이름")
+    

@@ -1,73 +1,85 @@
 {%extends 'base.html'%}
 {% block contents %}
-
+{%load static%}
 <head>
-    <style>
-        body {
-            font-size: 16px;
-        }
-
-        #write {
-            font-size: 16px;
-        }
-
-        .table_th {
-            width: 10%;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .board_form {
-            width: 100%;
-        }
-        #write_container{
-            margin-top: 100px;
-        }
-    </style>
-</head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'boardapp/write.css' %}">
 <script>
     function cancle_confirm(url) {
         var cancle = confirm('글 작성을 취소할까요?');
-        if (cancle == true) {
+        if(cancle == true){
             location = url;
         }
     }
 </script>
-
+<style>
+    body{
+    margin-top: 150px;
+    font-size: 16px;
+}
+</style>
+</head>
 <body>
     <div class="container" id="write_container">
         <form action="{%url 'create'%}" method="POST" enctype="multipart/form-data">
-            {%csrf_token%}
-
+                {%csrf_token%}
+        <div class="aside">
+            <h4 id="title">글쓰기</h4>
+        </div>
+        <form action="{%url 'create'%}">
             <table class="table table-bordered">
                 <tbody>
                     <tr>
-                        <th scope="row" class="table_th">제목</th>
+                        <th scope="row" class="table_th">과목</th>
                         <td>
-                            <div>{{form.subject}}</div>
+                            <div>
+                                <input style="width:20%;" type="text" name="subject">
+                                <button class="icon" style="background-color: white;"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="table_th">교수</th>
+                        <td>
+                            <div>{{form.professor}}</div>
                             <!-- <input style="width:100%;" type="text" name="title" required> -->
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row" class="table_th">내용</th>
-                        <td>{{form.content}}</td>
-                        <!-- <textarea class="form_control" style="width:100%;" rows="10" name="body" required></textarea> -->
+                        <th scope="row" class="table_th">항목</th>
+                        <td>
+                            <div> 
+                                <select class="custom-select" id="inputGroup-sizing-sm" name="item">
+                                <option name="middle">중간</option>
+                                <option name="final">기말</option>
+                                <option name="homework">과제</option>
+                            </select>
+                        </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="table_th">년도</th>
+                        <td>
+                            <div>{{form.year}}</div>
+                            <!-- <div><input style="width:25%;" type="text" name="year"></div> -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="table_th">제목</th>
+                        <td>
+                            <div><input style="width:50%;" type="text" name="title"></div>
+                        </td>
                     </tr>
                     <tr>
                         <th scope="row" class="table_th">첨부파일</th>
                         <td colspan="2">
-                            <!-- <div class="form-group"> -->
                             {{form.upload_files}}
-                            <!-- <input type="file" name='file' class="form-control-file" id="exampleFormControlFile1"> -->
-                            <!-- </div> -->
                         </td>
                     </tr>
                 </tbody>
             </table>
             <div style="float: right;">
-
-                <a href="javascript:cancle_confirm({%url 'board'%})"><span class="btn btn-outline-dark"
-                        id="write">취소하기</span></a>
+                <a  href="javascript:cancle_confirm({%url 'dataroom'%})" ><span class="btn btn-outline-dark" id="write">취소하기</span></a>
                 <input class="btn btn-outline-dark" id="write" type="submit" value="제출하기">
             </div>
         </form>
