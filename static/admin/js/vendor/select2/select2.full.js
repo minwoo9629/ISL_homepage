@@ -1,5 +1,9 @@
 /*!
+<<<<<<< HEAD
+ * Select2 4.0.7
+=======
  * Select2 4.0.13
+>>>>>>> park
  * https://select2.github.io
  *
  * Released under the MIT license
@@ -832,8 +836,11 @@ S2.define('select2/utils',[
     if (Utils.__cache[id] != null) {
       delete Utils.__cache[id];
     }
+<<<<<<< HEAD
+=======
 
     element.removeAttribute('data-select2-id');
+>>>>>>> park
   };
 
   return Utils;
@@ -1484,8 +1491,15 @@ S2.define('select2/selection/base',[
       self.$selection.removeAttr('aria-activedescendant');
       self.$selection.removeAttr('aria-owns');
 
+<<<<<<< HEAD
+      window.setTimeout(function () {
+        self.$selection.focus();
+      }, 0);
+    
+=======
       self.$selection.trigger('focus');
 
+>>>>>>> park
       self._detachCloseHandler(container);
     });
 
@@ -1675,6 +1689,9 @@ S2.define('select2/selection/single',[
     var formatted = this.display(selection, $rendered);
 
     $rendered.empty().append(formatted);
+<<<<<<< HEAD
+    $rendered.attr('title', selection.title || selection.text);
+=======
 
     var title = selection.title || selection.text;
 
@@ -1683,6 +1700,7 @@ S2.define('select2/selection/single',[
     } else {
       $rendered.removeAttr('title');
     }
+>>>>>>> park
   };
 
   return SingleSelection;
@@ -1785,6 +1803,10 @@ S2.define('select2/selection/multiple',[
       var formatted = this.display(selection, $selection);
 
       $selection.append(formatted);
+<<<<<<< HEAD
+      $selection.attr('title', selection.title || selection.text);
+
+=======
 
       var title = selection.title || selection.text;
 
@@ -1792,6 +1814,7 @@ S2.define('select2/selection/multiple',[
         $selection.attr('title', title);
       }
 
+>>>>>>> park
       Utils.StoreData($selection[0], 'data', selection);
 
       $selections.push($selection);
@@ -1931,7 +1954,11 @@ S2.define('select2/selection/allowClear',[
       }
     }
 
+<<<<<<< HEAD
+    this.$element.trigger('change');
+=======
     this.$element.trigger('input').trigger('change');
+>>>>>>> park
 
     this.trigger('toggle', {});
   };
@@ -1954,7 +1981,11 @@ S2.define('select2/selection/allowClear',[
       return;
     }
 
+<<<<<<< HEAD
+    var removeAll = this.options.get('translations').get('removeAllItems');   
+=======
     var removeAll = this.options.get('translations').get('removeAllItems');
+>>>>>>> park
 
     var $remove = $(
       '<span class="select2-selection__clear" title="' + removeAll() +'">' +
@@ -1983,7 +2014,11 @@ S2.define('select2/selection/search',[
       '<li class="select2-search select2-search--inline">' +
         '<input class="select2-search__field" type="search" tabindex="-1"' +
         ' autocomplete="off" autocorrect="off" autocapitalize="none"' +
+<<<<<<< HEAD
+        ' spellcheck="false" role="textbox" aria-autocomplete="list" />' +
+=======
         ' spellcheck="false" role="searchbox" aria-autocomplete="list" />' +
+>>>>>>> park
       '</li>'
     );
 
@@ -2160,7 +2195,17 @@ S2.define('select2/selection/search',[
 
     this.resizeSearch();
     if (searchHadFocus) {
+<<<<<<< HEAD
+      var isTagInput = this.$element.find('[data-select2-tag]').length;
+      if (isTagInput) {
+        // fix IE11 bug where tag input lost focus
+        this.$element.focus();
+      } else {
+        this.$search.focus();
+      }
+=======
       this.$search.trigger('focus');
+>>>>>>> park
     }
   };
 
@@ -4083,7 +4128,11 @@ S2.define('select2/dropdown/search',[
       '<span class="select2-search select2-search--dropdown">' +
         '<input class="select2-search__field" type="search" tabindex="-1"' +
         ' autocomplete="off" autocorrect="off" autocapitalize="none"' +
+<<<<<<< HEAD
+        ' spellcheck="false" role="textbox" />' +
+=======
         ' spellcheck="false" role="searchbox" aria-autocomplete="list" />' +
+>>>>>>> park
       '</span>'
     );
 
@@ -4137,12 +4186,20 @@ S2.define('select2/dropdown/search',[
       self.$search.removeAttr('aria-activedescendant');
 
       self.$search.val('');
+<<<<<<< HEAD
+      self.$search.blur();
+=======
       self.$search.trigger('blur');
+>>>>>>> park
     });
 
     container.on('focus', function () {
       if (!container.isOpen()) {
+<<<<<<< HEAD
+        self.$search.focus();
+=======
         self.$search.trigger('focus');
+>>>>>>> park
       }
     });
 

@@ -3,6 +3,10 @@
 {% load static %}
 
 <head>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- <link rel="stylesheet" href="{% static 'boardapp/dataroom.css' %}"> -->
   <style>
@@ -29,8 +33,7 @@
     }
 
     .aside {
-      margin-left: 200px;
-      width: 1550px;
+      width: 100%;
       height: 100px;
       background-color: darkslategray;
     }
@@ -39,11 +42,11 @@
       height: 50px;
       margin: 0px 190px;
       padding: 30px 20px;
-      width: 1550px;
+      width: 1400px;
+      margin:0 auto;
     }
 
     #write {
-      margin-left: 200px;
       margin-top: 30px;
     }
 
@@ -76,7 +79,8 @@
 
     #board {
       font-family: 'YESGothic-Regular';
-      width: 1550px;
+      width: 1400px;
+      margin:0 auto;
     }
 
     hr {
@@ -92,7 +96,7 @@
 
     .subject {
       background-color: rgb(228, 228, 228);
-      border: 0.1em inset black;
+      border: 0.1em inset gray;
       width: 150px;
     }
 
@@ -117,7 +121,8 @@
 
     table.type09 {
       margin-left: 200px;
-      width: 1550px;
+      width: 1400px;
+      margin:0 auto;
       font-family: 'YESGothic-Regular';
       border-collapse: collapse;
       text-align: left;
@@ -133,16 +138,22 @@
 
     #title {
       font-family: 'YESGothic-Regular';
-      float: left;
+      margin:0 auto;
+      width:1400px;
       font-size: 40px;
-      margin-top: 20px;
-      margin-left: 60px;
+      padding:20px;
       color: white;
     }
 
     .page-link {
       color: darkslategray;
       background-color: white;
+    }
+    html.body{
+      margin:0px;
+      padding:0px;
+      width:100%;
+      height:100%;
     }
   </style>
 </head>
@@ -156,14 +167,13 @@
       <article>
         <div class="search">
           <span class="name">과목선택
-            <input class="subject" type="text" readonly name="subject">
-            <input class="professor" type="text" readonly name="professor">
+            <input class="subject" type="text" readonly value="">
+            <input class="professor" type="text" readonly value="">
             <button class="icon" id="Search" style="background-color: white;" data-toggle="modal"
               data-target="#search"><i class="fa fa-search" style="border:none;" aria-hidden="true"></i></button>
           </span>
           <span class="input-group-sm mb-1">항목
-            <select class="custom-select" id="inputGroup-sizing-sm" style="width:100px; height:35px; font-size:15px;"
-              name="item">
+            <select class="custom-select item" id="inputGroup-sizing-sm" style="width:100px; height:35px; font-size:15px;">
               <option value="전체">전체</option>
               <option value="중간">중간</option>
               <option value="기말">기말</option>
@@ -171,13 +181,9 @@
             </select>
           </span>
           <span class="name">년도
-            <input class="item" type="text" name="year">
+            <input class="year" type="text" style="width:100px;">
           </span>
-          <!-- <span class="name">제목
-              <input class="title" type="text">
-            </span> -->
-          <button type="submit" class="btn btn-light btn-sm" id="submit">조회</button>
-
+          <button type="button" class="btn btn-light btn-sm btn_search" id="submit">조회</button>
         </div>
       </article>
       <article>
@@ -199,8 +205,8 @@
                 <td><a href="{% url 'detail' board.id%}">{{board.subject}}</a></td>
                 <td>{{board.professor}}</td>
                 <td>{{board.item}}</td>
-                <td><a href="{% url 'detail' board.id%}">{{board.title}}</a></td>
-                <td>{{board.year.year}}</td>
+                <td><a style="color:black;" href="{% url 'detail' board.id%}">{{board.title}}</a></td>
+                <td>{{board.year}}</td>
                 <td>{{board.author}}</td>
               </tr>
               {%endfor%}
@@ -212,32 +218,36 @@
             <br><br>
             <nav aria-label="Page navigation example">
               <ul class="pagination justify-content-center">
-                <a class="page-link" href="?page=1">
-                  맨앞</a>
+                <li>
+                  <a class="page-link" href="?page=1"> 처음 </a>
+                </li>
                 {%if post.has_previous%}
-                <a class="page-link" href="?page={{post.previous_page_number}}">
-                  이전</a>
+                <li>
+                  <a class="page-link" data-page="{{post.previous_page_number}}" href="#">이전</a>
+                </li>
                 {% else %}
-                <a class="page-link" href="#">
-                  이전</a>
-                {%endif%}
+                <li>
+                  <a class="page-link" tabindex="-1" aria-disabled="true" href="#"> 이전 </a>
+                  {%endif%}
+                </li>
                 {% for page in page_range%}
                 {%if page == post.number%}
                 <li class="page-item active" aria-current="page" {% if page == post.number %}class="active" {% endif %}>
-                  <a class="page-link" href="?page={{page}}">{{page}}<span class="sr-only">(current)</span></a>
+                  <a class="page-link" data-page="{{page}}" href="#">{{page}}<span class="sr-only">(current)</span></a>
                 </li>
                 {%else%}
-                <li class="page-item" {% if page == post.number %}class="active" {% endif %}>
-                  <a class="page-link" href="?page={{page}}">{{page}}</a>
+                <li class="page-item" {% if page == post.number %} class="active" {% endif %}>
+                  <a class="page-link" data-page="{{page}}"href="#">{{page}}</a>
                 </li>
                 {%endif%}
+
                 {% endfor %}
                 {%if post.has_next%}
-                <a class="page-link" href="?page={{post.next_page_number}}">다음</a>
+                <a class="page-link" href='#' data-page="{{post.next_page_number}}"> 다음 </a>
                 {%else%}
-                <a class="page-link" href="#">다음</a>
+                <a class="page-link" href="#"> 다음 </a>
                 {%endif%}
-                <a class="page-link" href="?page={{post.paginator.num_pages}}">맨뒤</a>
+                <a class="page-link" href="#" data-page="{{post.paginator.num_pages}}"> 맨끝 </a>
               </ul>
             </nav>
           </div>
@@ -245,43 +255,92 @@
       </article>
     </section>
   </div>
+  <form id="searchForm" method="GET" action="{%url 'dataroom'%}">
+    <input type="hidden" id="subject" name="subject"value="{{subject|default_if_none:''}}">
+    <input type="hidden" id="professor" name="professor" value="{{professor|default_if_none:''}}">
+    <input type="hidden" id="item" name="item" value="{{item|default_if_none:''}}">
+    <input type="hidden" id="year" name="year"value="{{year|default_if_none:''}}">
+    <input type="hidden" id="page" name="page" value="{{page}}" value="{{kw|default_if_none:''}}">
+  </form>
 
   <!-- Modal -->
-  <div class="modal fade" id="search" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade search_modal" id="search" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">과목 검색</h5>
-          <input class="item-modal" type="text" name="subname">
-          <button class="icon" id="Search-subject" style="background-color: white;" data-toggle="modal"
-            data-target="#search"><i class="fa fa-search" style="border:none;" aria-hidden="true"></i></button>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <table class="table table-striped">
-            <thead>
-              <th>과목명</th>
-              <th>교수</th>
-              <th>선택</th>
-            </thead>
-            <tbody>
-              {%for board in board_list%}
-              <tr>
-                <td>{{board.subject}}</td>
-                <td>{{board.professor}}</td>
-                <td><input name='board' type="radio"></td>
-              </tr>
-              {%endfor%}
-            </tbody>
-          </table>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary btn-sm">선택</button>
-          <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">취소</button>
-        </div>
+        <form method="POST" url_data="{% url 'search'%}" class="search_form">
+          {%csrf_token%}
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">과목 검색</h5>
+            <input class="item-modal" type="text" name="subname">
+            <button class="icon" id="Search-subject" style="background-color: white;" data-toggle="modal"
+              data-target="#search"><i class="fa fa-search" style="border:none;" aria-hidden="true"></i></button>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table class="table table-striped">
+              <thead>
+                <th>과목명</th>
+                <th>교수</th>
+                <th>선택</th>
+              </thead>
+              <tbody>
+                {%for board in board_list%}
+                <tr>
+                  <td>{{board.subject}}</td>
+                  <td>{{board.professor}}</td>
+                  <td><input name="search_value" type="radio" class="search_value" subject='{{board.subject}}'
+                      professor='{{board.professor}}'>
+                  </td>
+                </tr>
+                {%endfor%}
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary btn-sm select_btn">선택</button>
+            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">취소</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
+
+  <script>
+    $(document).ready(function () {
+      $(".search_modal").on('submit', '.search_form', function (e) {
+        e.preventDefault()
+        var form = $(this);
+        var subject = $("input[name='search_value']:checked").attr('subject');
+        var professor = $("input[name='search_value']:checked").attr('professor');
+        $.ajax({
+          type: form.attr('method'),
+          url: form.attr('url_data'),
+          data: { 'subject': subject, 'professor': professor, 'csrfmiddlewaretoken': '{{ csrf_token }}' },
+          dataType: 'json',
+        }).done(function (data) {
+          if (data.search_valid) {
+            $('.search_modal').modal('hide');
+            $('.subject').val(data.subject);
+            $('.professor').val(data.professor);
+          } else {
+            console.log('error');
+          }
+        });
+      });
+      $(".page-link").on('click', function(){
+        $("#page").val($(this).data("page"));
+        $("#searchForm").submit();
+      });
+      $(".btn_search").on('click', function(){
+        $("#subject").val($(".subject").val());
+        $("#professor").val($(".professor").val());
+        $("#item").val($(".item").val());
+        $("#year").val($(".year").val());
+        $("#page").val(1);  // 검색버튼을 클릭할 경우 1페이지부터 조회한다.
+        $("#searchForm").submit()
+      });
+    });
+  </script>
   {% endblock %}

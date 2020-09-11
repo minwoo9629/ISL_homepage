@@ -160,4 +160,9 @@ function findPosY(obj) {
         // date extraction.
         return new Date(Date.UTC(year, month, day));
     };
+<<<<<<< HEAD
+
+})();
+=======
 }
+>>>>>>> park

@@ -1,6 +1,7 @@
-{%extends 'base.html'%}
-{% block contents %}
+{% extends 'base.html'%}
 {% load static %}
+{% block contents %}
+
 <head>
     <style>
         @font-face { font-family: 'YESGothic-Bold'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_13@1.0/YESGothic-Bold.woff') format('woff'); font-weight: normal; }
@@ -21,7 +22,8 @@
     }
     #professor {
             float: left;
-            top: 0; left: 0;
+            top: 0;
+            left: 0;
             border-radius: 50%;
             margin: 5px;
             margin-right: 50px;
@@ -36,26 +38,33 @@
     font-family: 'GmarketSansBold';
     height: 400px;
     color:white;
+    width:100%;
     }
     
     body{
         position:sticky;
+        padding:0px;
     }
     #title{
         font-family: 'GmarketSansBold';
         font-size: 70px;
-        text-align:left;
+        text-align:center;
+    }
+    .row{
+        margin:0px;
+        padding:0px;
     }
     </style>
 </head>
+
 <body>
 
     <header>
-        <div class="container">
+        <div>
           <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
               <div style="margin-top: 150px;">
-                <h1 id=title>Intelligent System Lab</h1>
+                <h1 id=title>Intelligent System Lap</h1>
               </div>
             </div>
           </div>
@@ -65,7 +74,8 @@
     <div class="container">
         <div class="row" id="card">
             <div class="col-md-6">
-                <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div
+                    class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                     <div class="col p-3 d-felx flex-column position-static">
                         <h3>랩실 소개</h3>            
                         <P class="card-text mb-auto">I.S.L 랩실은 Intelligent System Lab의 약자로 차세대 기술을 <br>선도하기를 원하는 학생들이 모여있는 학부 랩실입니다.<br><br>
@@ -76,7 +86,8 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div
+                    class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                     <div class="col p-3 d-felx flex-column position-static">
                         <h3>담당 교수 소개</h3>
             
@@ -89,14 +100,14 @@
                             이메일 : cjkim@hanbat.ac.kr</P>
                    
                     </div>
-                </div> 
-            </div>    
-        </div>                    
+                </div>
+            </div>
+        </div>
     </div>
     <div class="container">
-    <table class="table">
-        <th>테이블</th>
-    </table>
+        <table class="table">
+            <th>테이블</th>
+        </table>
     </div>
 </body>
 {% endblock %}

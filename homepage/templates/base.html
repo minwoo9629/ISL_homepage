@@ -5,6 +5,7 @@
   integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 <head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <meta charset="utf-8">
   <title>ISL PAGE</title>
 <!-- 
@@ -44,8 +45,9 @@
     #mainNav{
         background:white;
         height:54px;
-        width:1400px;
+        width:1500px;
         margin:0 auto;
+        padding:0 auto;
       }
       
     h6{
@@ -63,7 +65,6 @@
       text-decoration:none;
       position: relative;
       bottom:-3px;
-
       margin-right: -1px;
       float:right;
     }
@@ -118,7 +119,7 @@
       width:100%;
       height:100%;
       margin: 0;
-      padding:0;
+      padding: 0;
     }
     #outer-menu{
       list-style-type:none;
@@ -131,53 +132,59 @@
       margin-top:15px;
       margin-left:220px;
     }
-
+    .hr{
+      margin-top:-5px;
+    }
   </style>
 </head>
+
 <body>
-  <div class="navbar">
+  <div class="nav_bar">
   <nav id="mainNav">
     <div class=logo>
       <img src="{% static 'mainapp/img/logo.jpg'%}" id="image">
       <a class="navbar-brand" id="I_S_L" href="{%url 'home' %}">I.S.L</a>
     </div>
-      <div id="navbarResponsive">
-        <ul id="outer-menu">
-          {% if user.is_active%}
-          <li><a class="btn-sm btn-outline-light" id="login"
+    <div class="" id="navbarResponsive">
+      <ul class="" id="outer-menu">
+        {% if user.is_active%}
+        <li><a class="btn-sm btn-outline-light" id="login"
             href="javascript:{document.getElementById('logout').submit()}">LOGOUT</a></li>
-          <li><a class="btn-sm btn-outline-white" id="login" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">{{ user.username }} 로그인 중</a></li>
-            {%csrf_token%}<input type="hidden" />
-          </form>
-          {% else %}
-          <li><a class="btn-outline-light btn-sm" id="login" href="{%url 'sign_in'%}">로그인</a></li>
-          <li><a class="btn-sm btn-outline-light" id="login" href="{%url 'sign_up'%}"
-              onclick="window.open(this.href,'_blanck','width=500,height=500');return false;">회원가입</a></li>
-          {% endif %}
-          <li class="nav-item">
-            <a class="nav-link" href="{%url 'dataroom' %}">자료실</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{%url 'home' %}">랩실소개</a>
-          </li>
+        <li><a class="btn-sm btn-outline-light" id="login" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">{{ user.username }} 로그인 중</a></li>
+        <form id="logout" method="POST" action="{%url 'logout'%}">
+          {%csrf_token%}<input type="hidden" />
+        </form>
+        {% else %}
+        <li><a class="btn-sm btn-outline-light" id="login" href="{%url 'sign_up'%}"
+          onclick="window.open(this.href,'_blanck','width=500,height=500');return false;">회원가입</a></li>
+        <li><a class="btn-outline-light btn-sm" id="login" href="{%url 'sign_in'%}">로그인</a></li>
+        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link" id="dataroom_link" href="{%url 'dataroom' %}">자료실</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{%url 'home' %}">랩실소개</a>
+        </li>
+        <script>
+          $(document).ready(function () {
+            $('#dataroom_link').click(function (e) {
+              e.preventDefault();
+              var user_group = "{{user_group}}";
+              if (user_group == "ISL_USER") {
+                window.location = "{%url 'dataroom' %}"
+              }
+              else {
+                alert("랩실원만 열람 가능합니다!");
+              }
+            });
+          });
+          </script>
         </ul>
       </div>
     </nav>
   </div>
-
-
-
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-    </script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script>
   {% block contents %}
-  {% endblock %}
+  {%endblock%}
 </body>
 </html>
