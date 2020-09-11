@@ -1,4 +1,10 @@
-@font-face { font-family: 'YESGothic-Regular'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_13@1.0/YESGothic-Regular.woff') format('woff'); font-weight: normal; font-style: normal; }
+@font-face { 
+    font-family: 'YESGothic-Regular'; 
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_13@1.0/YESGothic-Regular.woff') 
+    format('woff'); 
+    font-weight: normal; 
+    font-style: normal; 
+}
 body{
     font-size: 16px;
 }
@@ -19,9 +25,15 @@ hr{
 }
 .subject{
     background-color: rgb(228, 228, 228);
+    width:150px;
+}
+.professor{
     width:100px;
 }
 .item{
+    width:100px;
+}
+.title{
     width:100px;
 }
 #submit{
@@ -30,6 +42,8 @@ hr{
     margin-top: 13px;
 }
 table.type09 {
+    margin-left:200px;
+    width:1550px;
     font-family: 'YESGothic-Regular';
     border-collapse: collapse;
     text-align: left;
@@ -37,7 +51,6 @@ table.type09 {
     width:100%;
 }
 table.type09 thead th {
-    padding: 10px 20px;
     font-weight: bold;
     vertical-align: top;
     color: darkslategray;
@@ -52,32 +65,17 @@ table.type09 td {
 }
 #title{
     font-family: 'YESGothic-Regular';
-    margin-top: 75px;
+    margin-top: 28px;
     margin-left:70px;
     color:white;
-}
-.search{
-    height:30px;
-    margin:0px 55px;  
-    padding:50px;
-}
-.aside{
-    width:100%;
-    height:140px;
-    background-color:darkslategray;
 }
 .page-link{
     color:darkslategray;
     background-color:white;
 }
-.modal-title{
-    font-weight: bold;
-    font-size:20px;
-    padding:10px;
-}
-.item-modal{
-    margin-top:10px;
-}
-.modal-content{
-    font-family: 'YESGothic-Regular';
-}
+html, body{
+    width:100%;
+    height:100%;
+    margin: 0;
+    padding:0;
+  }

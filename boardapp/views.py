@@ -9,8 +9,7 @@ def board(request):
     return render(request,'board.html')
 
 def dataroom(request):
-    #if request.method == 'GET' :
-        
+    if request.method == 'GET' :    
         board_list = DataRoom.objects.all().order_by('-id')
         # 게시판 모든 글들을 대상으로 한다.
         num = 5
@@ -32,32 +31,50 @@ def dataroom(request):
         page_range = paginator.page_range[start_index:end_index]    
         
         boards = DataRoom.objects.all().values('subject','professor').distinct()
-        return render(request, 'dataroom.html', { 'post':post,'page_range':page_range,'board_list':boards}) 
-    #elif request.method == 'POST':
+        context = { 'post':post,'page_range':page_range,'board_list':boards}
+        return render(request, 'dataroom.html', context)
+         
+    elif request.method == 'POST':
+        search_list = DataRoom.objects.all().order_by('-id')
+        subject = request.POST.get('subject','')
+        professor = request.POST.get('professor','')
+        item = request.POST.get('item','')
+        year = request.POST.get('year','')
+        if professor != '' and subject != '':
+            search_list = search_list.filter(subject=subject).filter(professor=professor)
+        else:
+            pass
+        if item != '전체':
+            search_list = search_list.filter(item=item)
+        else:
+            pass
+        if year != '':
+            search_list = search_list.filter(year=year)
+        else:
+            pass
+        # 게시판 모든 글들을 대상으로 한다.
+        num = 5
+        paginator = Paginator(search_list, num)
+        # 게시판 객체 num 개를 한 페이지로 자른다.
+        board_page = request.GET.get('page')
+        # request된 페이지를 변수에 담는다.
+        post = paginator.get_page(board_page) 
+        # request된 페이지를 얻어온 뒤 post에 저장
+        page_numbers_range = 5
+        #화면에 보여줄 페이지 번호 갯수
+        max_index = len(paginator.page_range)
+        current_page = int(board_page) if board_page else 1
+        start_index = int((current_page - 1) / page_numbers_range) * page_numbers_range
+        end_index = start_index + page_numbers_range
+        if end_index >= max_index:
+            end_index = max_index
 
-      #  return render(request, 'dataroom.html')
+        page_range = paginator.page_range[start_index:end_index] 
+        boards = DataRoom.objects.all().values('subject','professor').distinct()
+        context = { 'post':post,'page_range':page_range,'board_list':boards}
+        return render(request, 'dataroom.html', context) 
 
 
-# def create(request):
-#     # 새로운 데이터 블로그 글 저장하는 역할 == POST
-#     if request.method == 'POST':
-#         # 입력된 블로그 글들을 저장
-#         djangoBoard = DjangoBoard(request.POST)
-#         if djangoBoard.is_valid:
-#             djangoboard = DjangoBoard()
-#             djangoboard.subject = request.GET['title']
-#             djangoboard.memo = request.GET['body']
-#             djangoboard.name = request.user
-#             djangoboard.created_date = timezone.datetime.now()
-#             djangoboard.save()
-#             return redirect('/detail/')
-#         #글쓰기 페이지를 띄워주는 역할 == GET
-#         else:
-#             # 단순히 입력받을 수 있는 form을 띄워줘라
-#             form = NewDjangoBoard()
-#             return render(request, 'write.html',{'form':form})
-#     #    입력된 블로그 글들을 저장해라
-#     #    글쓰기 페이지를 띄워주는 역할 == GET(!=POST)
 
 def create(request):
     dataroom = DataRoom()
@@ -66,7 +83,7 @@ def create(request):
     dataroom.item = request.GET['item']
     dataroom.title = request.GET['title']
     dataroom.year = request.GET['year']
-    dataroom.name = request.user
+    dataroom.author = request.user
     dataroom.save()
     #글 쓴 뒤에 dataroom으로 돌아감
     return redirect('/dataroom/')

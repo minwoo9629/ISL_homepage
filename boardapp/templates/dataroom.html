@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 {% block contents %}
 {% load static %}
+
 <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="{% static 'boardapp/dataroom.css' %}">
+  <!-- <link rel="stylesheet" href="{% static 'boardapp/dataroom.css' %}"> -->
   <style>
     .modal-title {
       font-weight: bold;
@@ -22,28 +23,127 @@
     .modal-body {
       height: 400px;
     }
-    #Search-subject{
-      margin-top:10px;
+
+    #Search-subject {
+      margin-top: 10px;
     }
-    .aside{
-    margin-left:200px;
-    width:80%;
-    height:140px;
-    background-color:darkslategray;
+
+    .aside {
+      margin-left: 200px;
+      width: 1550px;
+      height: 100px;
+      background-color: darkslategray;
+    }
+
+    .search {
+      height: 50px;
+      margin: 0px 190px;
+      padding: 30px 20px;
+      width: 1550px;
+    }
+
+    #write {
+      margin-left: 200px;
+      margin-top: 30px;
+    }
+
+    table.type09 thead th {
+      padding: 10px 20px;
+      font-weight: bold;
+      vertical-align: top;
+      color: darkslategray;
+      border-bottom: 3px solid darkslategray;
+    }
+
+    table.type09 tbody td a {
+      color: black;
+    }
+
+    @font-face {
+      font-family: 'YESGothic-Regular';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_13@1.0/YESGothic-Regular.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    body {
+      font-size: 16px;
+    }
+
+    #write {
+      font-size: 16px;
+    }
+
+    #board {
+      font-family: 'YESGothic-Regular';
+      width: 1550px;
+    }
+
+    hr {
+      margin-top: 30px;
+      color: darkslategray;
+    }
+
+    .name {
+      padding-right: 10px;
+      font-family: 'YESGothic-Regular';
+      color: darkslategray;
+    }
+
+    .subject {
+      background-color: rgb(228, 228, 228);
+      border: 0.1em inset black;
+      width: 150px;
+    }
+
+    .professor {
+      width: 100px;
+      margin-left:-3px;
+    }
+
+    .item {
+      width: 100px;
+    }
+
+    .title {
+      width: 100px;
+    }
+
+    #submit {
+      float: right;
+      font-size: 16px;
+      margin-top: 13px;
     }
 
     table.type09 {
-      margin-left:200px;
-      width:80%;
+      margin-left: 200px;
+      width: 1550px;
+      font-family: 'YESGothic-Regular';
+      border-collapse: collapse;
+      text-align: left;
+      line-height: 1.5;
+      width: 100%;
     }
-    .search{
-      height:50px;
-      margin:0px 190px;  
-      padding:30px 20px;
+
+    table.type09 td {
+      width: 700px;
+      padding: 20px;
+      vertical-align: top;
+      border-bottom: 1px solid #ccc;
     }
-    #write{
-      margin-left:200px;
-      margin-top:10px;
+
+    #title {
+      font-family: 'YESGothic-Regular';
+      float: left;
+      font-size: 40px;
+      margin-top: 20px;
+      margin-left: 60px;
+      color: white;
+    }
+
+    .page-link {
+      color: darkslategray;
+      background-color: white;
     }
   </style>
 </head>
@@ -56,28 +156,29 @@
     <section>
       <article>
         <div class="search">
-            <span class="name">과목선택
-              <input class="subject" type="text" disabled tabindex="-1">
-              <input class="professor" type="text" disabled tabindex="-1">
-              <button class="icon" id="Search" style="background-color: white;" data-toggle="modal"
-                data-target="#search"><i class="fa fa-search" style="border:none;" aria-hidden="true"></i></button>
-            </span>
-            <span class="input-group-sm mb-1">항목
-              <select class="custom-select" id="inputGroup-sizing-sm" style="width:100px; height:35px; font-size:15px;">
-                <option value="all">전체</option>
-                <option value="middle">중간</option>
-                <option value="final">기말</option>
-                <option value="homework">과제</option>
+          <span class="name">과목선택
+            <input class="subject" type="text" readonly name="subject">
+            <input class="professor" type="text" readonly name="professor">
+            <button class="icon" id="Search" style="background-color: white;" data-toggle="modal"
+              data-target="#search"><i class="fa fa-search" style="border:none;" aria-hidden="true"></i></button>
+          </span>
+          <span class="input-group-sm mb-1">항목
+            <select class="custom-select" id="inputGroup-sizing-sm" style="width:100px; height:35px; font-size:15px;"
+              name="item">
+              <option value="전체">전체</option>
+              <option value="중간">중간</option>
+              <option value="기말">기말</option>
+              <option value="과제">과제</option>
+            </select>
+          </span>
+          <span class="name">년도
+            <input class="item" type="text" name="year">
+          </span>
+          <!-- <span class="name">제목
+              <input class="title" type="text">
+            </span> -->
+          <button type="submit" class="btn btn-light btn-sm" id="submit">조회</button>
 
-              </select>
-            </span>
-            <span class="name">년도
-              <input class="item" type="text">
-            </span>
-            <span class="name">제목
-              <input class="item" type="text">
-            </span>
-            <button type="submit" class="btn btn-light btn-sm" id="submit" style="margin-left:40px;">조회</button>
         </div>
       </article>
       <article>
@@ -85,22 +186,21 @@
           <table class="type09">
             <thead>
               <tr>
-                <th scope="cols">과목</th>
-                <th scope="cols">교수</th>
-                <th scope="cols">항목</th>
-                <th scope="cols">제목</th>
-                <th scope="cols">년도</th>
-                <th scope="cols">작성자</th>
+                <th style="width:20%" scope="cols" colspan="">과목</th>
+                <th style="width:10%" scope="cols">교수</th>
+                <th style="width:10%" scope="cols">항목</th>
+                <th style="width:35%" scope="cols">제목</th>
+                <th style="width:10%" scope="cols">년도</th>
+                <th style="width:15%" scope="cols">작성자</th>
               </tr>
             </thead>
             <tbody>
               {% for board in post %}
               <tr>
-                <td><a style="color:black;" href="{% url 'detail' board.id%}">{{board.subject}}</a></td>
+                <td><a href="{% url 'detail' board.id%}">{{board.subject}}</a></td>
                 <td>{{board.professor}}</td>
                 <td>{{board.item}}</td>
-                <td><a style="color:black;"
-                    href="{% url 'detail' board.id%}">{{board.title}}</a></td>
+                <td><a href="{% url 'detail' board.id%}">{{board.title}}</a></td>
                 <td>{{board.year.year}}</td>
                 <td>{{board.author}}</td>
               </tr>
@@ -114,37 +214,33 @@
             <nav aria-label="Page navigation example">
               <ul class="pagination justify-content-center">
                 <a class="page-link" href="?page=1">
-                  <<</a>
-                    {%if post.has_previous%}
-                    <a class="page-link" href="?page={{post.previous_page_number}}">
-                      <</a>
-                        {% else %}
-                        <a class="page-link" href="#">
-                          <</a>
-                            {%endif%}
-                            {% for page in page_range%}
-                            {%if page == post.number%}
-                            <li class="page-item active" aria-current="page" {% if page == post.number %}class="active"
-                              {% endif %}>
-                              <a class="page-link" href="?page={{page}}">{{page}}<span
-                                  class="sr-only">(current)</span></a>
-                            </li>
-                            {%else%}
-                            <li class="page-item" {% if page == post.number %}class="active" {% endif %}>
-                              <a class="page-link" href="?page={{page}}">{{page}}</a>
-                            </li>
-                            {%endif%}
-
-                            {% endfor %}
-                            {%if post.has_next%}
-                            <a class="page-link" href="?page={{post.next_page_number}}">></a>
-                            {%else%}
-                            <a class="page-link" href="#">></a>
-                            {%endif%}
-                            <a class="page-link" href="?page={{post.paginator.num_pages}}">>></a>
+                  맨앞</a>
+                {%if post.has_previous%}
+                <a class="page-link" href="?page={{post.previous_page_number}}">
+                  이전</a>
+                {% else %}
+                <a class="page-link" href="#">
+                  이전</a>
+                {%endif%}
+                {% for page in page_range%}
+                {%if page == post.number%}
+                <li class="page-item active" aria-current="page" {% if page == post.number %}class="active" {% endif %}>
+                  <a class="page-link" href="?page={{page}}">{{page}}<span class="sr-only">(current)</span></a>
+                </li>
+                {%else%}
+                <li class="page-item" {% if page == post.number %}class="active" {% endif %}>
+                  <a class="page-link" href="?page={{page}}">{{page}}</a>
+                </li>
+                {%endif%}
+                {% endfor %}
+                {%if post.has_next%}
+                <a class="page-link" href="?page={{post.next_page_number}}">다음</a>
+                {%else%}
+                <a class="page-link" href="#">다음</a>
+                {%endif%}
+                <a class="page-link" href="?page={{post.paginator.num_pages}}">맨뒤</a>
               </ul>
             </nav>
-
           </div>
         </div>
       </article>
@@ -159,7 +255,7 @@
           <h5 class="modal-title" id="exampleModalLabel">과목 검색</h5>
           <input class="item-modal" type="text" name="subname">
           <button class="icon" id="Search-subject" style="background-color: white;" data-toggle="modal"
-          data-target="#search"><i class="fa fa-search" style="border:none;" aria-hidden="true"></i></button>
+            data-target="#search"><i class="fa fa-search" style="border:none;" aria-hidden="true"></i></button>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -189,4 +285,4 @@
       </div>
     </div>
   </div>
-{% endblock %}
+  {% endblock %}
