@@ -11,7 +11,7 @@ def get_file_path(instance,filename):
     uuid_name = uuid4().hex
     return '/'.join(['upload_file/', ymd_path, uuid_name])
 
-class DjangoBoard(models.Model,HitCountMixin):
+class DataRoom(models.Model,HitCountMixin):
       subject = models.CharField(max_length=50, null=True, verbose_name="과목")
       professor = models.CharField(max_length=10, null=True, verbose_name="교수")
       item = models.CharField(max_length=10, null=True, verbose_name="항목")

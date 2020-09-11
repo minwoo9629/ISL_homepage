@@ -1,9 +1,9 @@
 from django import forms
-from .models import DjangoBoard
+from .models import DataRoom
 
-class DjangoBoardForm(forms.ModelForm):
+class DataRoomForm(forms.ModelForm):
     class Meta:
-        model = DjangoBoard
+        model = DataRoom
         fields = ['subject','professor','item','year','title','upload_files']
 
         widgets = {
