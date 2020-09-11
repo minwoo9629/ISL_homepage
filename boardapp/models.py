@@ -12,9 +12,10 @@ def get_file_path(instance,filename):
     return '/'.join(['upload_file/', ymd_path, uuid_name])
 
 class DataRoom(models.Model,HitCountMixin):
+      ITEM_CHOCIES = (('중간','중간'),('기말','기말'),('과제','과제'))
       subject = models.CharField(max_length=50, null=True, verbose_name="과목")
       professor = models.CharField(max_length=10, null=True, verbose_name="교수")
-      item = models.CharField(max_length=10, null=True, verbose_name="항목")
+      item = models.CharField(max_length=10, null=True, verbose_name="항목", choices=ITEM_CHOCIES)
       title = models.CharField(max_length=50, null=True, verbose_name="글 제목")
       author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
       year = models.IntegerField()

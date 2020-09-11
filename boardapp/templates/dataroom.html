@@ -8,7 +8,7 @@
     </script>
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="{% static 'boardapp/dataroom.css' %}">
+  <!-- <link rel="stylesheet" href="{% static 'boardapp/dataroom.css' %}"> -->
   <style>
     .modal-title {
       font-weight: bold;
@@ -34,25 +34,120 @@
 
     .aside {
       margin-left: 200px;
-      width: 80%;
-      height: 140px;
+      width: 1550px;
+      height: 100px;
       background-color: darkslategray;
-    }
-
-    table.type09 {
-      margin-left: 200px;
-      width: 80%;
     }
 
     .search {
       height: 50px;
       margin: 0px 190px;
       padding: 30px 20px;
+      width: 1550px;
     }
 
     #write {
       margin-left: 200px;
-      margin-top: 10px;
+      margin-top: 30px;
+    }
+
+    table.type09 thead th {
+      padding: 10px 20px;
+      font-weight: bold;
+      vertical-align: top;
+      color: darkslategray;
+      border-bottom: 3px solid darkslategray;
+    }
+
+    table.type09 tbody td a {
+      color: black;
+    }
+
+    @font-face {
+      font-family: 'YESGothic-Regular';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_13@1.0/YESGothic-Regular.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    body {
+      font-size: 16px;
+    }
+
+    #write {
+      font-size: 16px;
+    }
+
+    #board {
+      font-family: 'YESGothic-Regular';
+      width: 1550px;
+    }
+
+    hr {
+      margin-top: 30px;
+      color: darkslategray;
+    }
+
+    .name {
+      padding-right: 10px;
+      font-family: 'YESGothic-Regular';
+      color: darkslategray;
+    }
+
+    .subject {
+      background-color: rgb(228, 228, 228);
+      border: 0.1em inset black;
+      width: 150px;
+    }
+
+    .professor {
+      width: 100px;
+      margin-left:-3px;
+    }
+
+    .item {
+      width: 100px;
+    }
+
+    .title {
+      width: 100px;
+    }
+
+    #submit {
+      float: right;
+      font-size: 16px;
+      margin-top: 13px;
+    }
+
+    table.type09 {
+      margin-left: 200px;
+      width: 1550px;
+      font-family: 'YESGothic-Regular';
+      border-collapse: collapse;
+      text-align: left;
+      line-height: 1.5;
+      width: 100%;
+    }
+
+    table.type09 td {
+      width: 700px;
+      padding: 20px;
+      vertical-align: top;
+      border-bottom: 1px solid #ccc;
+    }
+
+    #title {
+      font-family: 'YESGothic-Regular';
+      float: left;
+      font-size: 40px;
+      margin-top: 20px;
+      margin-left: 60px;
+      color: white;
+    }
+
+    .page-link {
+      color: darkslategray;
+      background-color: white;
     }
   </style>
 </head>
@@ -85,7 +180,7 @@
           <!-- <span class="name">제목
             <input class="item" type="text">
           </span> -->
-          <button type="button" class="btn btn-light btn-sm btn_search" id="submit" style="margin-left:40px;">조회</button>
+          <button type="button" class="btn btn-light btn-sm btn_search" id="submit">조회</button>
         </div>
       </article>
       <article>
@@ -93,18 +188,18 @@
           <table class="type09">
             <thead>
               <tr>
-                <th scope="cols">과목</th>
-                <th scope="cols">교수</th>
-                <th scope="cols">항목</th>
-                <th scope="cols">제목</th>
-                <th scope="cols">년도</th>
-                <th scope="cols">작성자</th>
+                <th style="width:20%" scope="cols" colspan="">과목</th>
+                <th style="width:10%" scope="cols">교수</th>
+                <th style="width:10%" scope="cols">항목</th>
+                <th style="width:35%" scope="cols">제목</th>
+                <th style="width:10%" scope="cols">년도</th>
+                <th style="width:15%" scope="cols">작성자</th>
               </tr>
             </thead>
             <tbody>
               {% for board in post %}
               <tr>
-                <td><a style="color:black;" href="{% url 'detail' board.id%}">{{board.subject}}</a></td>
+                <td><a href="{% url 'detail' board.id%}">{{board.subject}}</a></td>
                 <td>{{board.professor}}</td>
                 <td>{{board.item}}</td>
                 <td><a style="color:black;" href="{% url 'detail' board.id%}">{{board.title}}</a></td>
@@ -152,7 +247,6 @@
                 <a class="page-link" href="#" data-page="{{post.paginator.num_pages}}"> 맨끝 </a>
               </ul>
             </nav>
-
           </div>
         </div>
       </article>

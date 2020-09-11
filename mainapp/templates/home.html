@@ -4,42 +4,30 @@
 
 <head>
     <style>
-        @font-face {
-            font-family: 'YESGothic-Bold';
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_13@1.0/YESGothic-Bold.woff') format('woff');
-            font-weight: normal;
-        }
-
-        @font-face {
-            font-family: 'YESGothic-Regular';
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_13@1.0/YESGothic-Regular.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
-
-        h3 {
-            list-style-type: none;
-            padding: 20px 0;
-            border-bottom: 1px solid darkslategrey;
-            font-family: 'YESGothic-Bold';
-            font-size: 20px;
-            color: darkslategray;
-
-        }
-
-        P {
-            font-family: 'YESGothic-Regular';
-            font-size: 16px;
-            color: darkslategray;
-        }
-
-        img {
+        @font-face { font-family: 'YESGothic-Bold'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_13@1.0/YESGothic-Bold.woff') format('woff'); font-weight: normal; }
+        @font-face { font-family: 'YESGothic-Regular'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_13@1.0/YESGothic-Regular.woff') format('woff'); font-weight: normal; font-style: normal; }
+    h3{
+        list-style-type: none;
+        padding: 20px 0;
+        border-bottom: 1px solid darkslategrey;
+        font-family: 'YESGothic-Bold';
+        font-size: 20px;
+        color:darkslategray;
+        
+    }
+    P{
+        font-family: 'YESGothic-Regular';
+        font-size: 16px;
+        color:darkslategray;
+    }
+    #professor {
             float: left;
             top: 0;
             left: 0;
             border-radius: 50%;
             margin: 5px;
             margin-right: 50px;
+            margin-bottom: 80px;
     }
     #card{
         margin-top: 30px;
@@ -52,6 +40,14 @@
     color:white;
     }
     
+    body{
+        position:sticky;
+    }
+    #title{
+        font-family: 'GmarketSansBold';
+        font-size: 70px;
+        text-align:left;
+    }
     </style>
 </head>
 
@@ -61,8 +57,9 @@
         <div class="container">
           <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
-              <div style="margin-top: 170px;">
-                <h1>Intelligent System Lab</h1>
+              <div style="margin-top: 150px;">
+                <h1 id=title>Intelligent System</h1>
+                <h1 id=title>Lab</h1>
               </div>
             </div>
           </div>
@@ -75,12 +72,10 @@
                 <div
                     class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                     <div class="col p-3 d-felx flex-column position-static">
-                        <h3>랩실 소개</h3>
-            
-                        <P class="card-text mb-auto">I.S.L 랩실은 Intelligent System Lab의 약자로 차세대 기술을 선도하기를 원하는 학생들이 모여있는 학부 랩실입니다.<br>
-                        python, JAVA가 주력 언어이며 여러 Framework 를 활용하여 영상 처리 및 Machine Learning을 공부하고 있습니다.<br>
-                        N4동 612-2호에 위치하고 있으며 iMAC과 ubuntu, window 등 다양한 환경을 갖고 있는 PC가 있습니다. <br>
-                        
+                        <h3>랩실 소개</h3>            
+                        <P class="card-text mb-auto">I.S.L 랩실은 Intelligent System Lab의 약자로 차세대 기술을 <br>선도하기를 원하는 학생들이 모여있는 학부 랩실입니다.<br><br>
+                        python, JAVA가 주력 언어이며 여러 Framework 를 활용하여<br> 영상 처리 및 Machine Learning을 공부하고 있습니다.<br><br>
+                        N4동 612-2호에 위치하고 있으며 iMAC과 ubuntu, window 등<br> 다양한 환경을 갖고 있는 PC가 있습니다. <br><br>                       
                         </P>
                     </div>
                 </div>
@@ -90,12 +85,15 @@
                     class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                     <div class="col p-3 d-felx flex-column position-static">
                         <h3>담당 교수 소개</h3>
-
-                        <img src="{% static 'mainapp/img/professor.jpg'%}">
+            
+                        <img id="professor"src= "{% static 'mainapp/img/professor.jpg'%}">
                         <P> 김차종 교수님<br><br>
                             전공분야 : 컴퓨터그래픽, 정보공학<br>
                             관련교과목 : 컴퓨터그래픽스, Linux/Linux System, JAVA<br>
-                            연구실 : N4동 609호<br>                            
+                            연구실 : N4동 609호<br>
+                            전화번호 : 042-821-1206<br>
+                            이메일 : cjkim@hanbat.ac.kr</P>
+                   
                     </div>
                 </div>
             </div>

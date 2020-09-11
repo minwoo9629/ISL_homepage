@@ -1,46 +1,160 @@
 {%extends 'base.html'%}
 {% block contents %}
 {%load static%}
+
 <head>
-<script>
-    function delete_confirm() {
-        var delete_c = confirm('정말 삭제하시겠습니까?');
-        if (!delete_c) {
-            event.defaultPrevented();
+    <script>
+        function delete_confirm() {
+            var delete_c = confirm('정말 삭제하시겠습니까?');
+            if (!delete_c) {
+                event.defaultPrevented();
+            }
+            else {
+                location.href = "{%url 'delete' dataroom.id%}"
+            }
         }
-        else{
-            location.href="{%url 'delete' dataroom.id%}"
+    </script>
+    <style>
+        #but {
+            color: black;
+            text-decoration-line: none;
         }
-    }
-</script>
-<style>
-    #but{
-        color:black;
-        text-decoration-line: none;
-    }
-</style>
-<link rel="stylesheet" href="{% static 'boardapp/detail.css' %}">
+
+        #dataroomlink {
+            color: white;
+            text-decoration-line: none;
+        }
+
+        @font-face {
+            font-family: 'YESGothic-Regular';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_13@1.0/YESGothic-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        #detail_title {
+            font-family: 'YESGothic-Regular';
+            font-weight: bold;
+            font-size: 18px;
+            padding: 10px;
+        }
+
+        #title {
+            font-family: 'YESGothic-Regular';
+            float: left;
+            font-size: 40px;
+            margin-top: 20px;
+            margin-left: 60px;
+            color: white;
+        }
+
+        .none_display {
+            display: none;
+        }
+
+        body {
+            font-size: 16px;
+        }
+
+        #write {
+            font-size: 16px;
+        }
+
+        #detail_sub {
+            font-family: 'YESGothic-Regular';
+            font-weight: bold;
+            font-size: 24px;
+            padding: 5px 10px;
+        }
+
+        #detail_item {
+            font-family: 'YESGothic-Regular';
+            padding: 10px;
+        }
+
+        .right {
+            font-family: 'YESGothic-Regular';
+            float: right;
+            padding: 5px;
+        }
+
+        #file {
+            padding-left: 10px;
+        }
+
+        .aside {
+            margin-left: 0px;
+            height: 90px;
+            background-color: darkslategray;
+        }
+
+        #detail_all {
+            margin-top: 80px;
+        }
+
+        #detail_title {
+            font-family: 'YESGothic-Regular';
+            font-weight: bold;
+            font-size: 18px;
+            padding: 10px;
+        }
+
+        #button {
+            float: right;
+            margin: 5px;
+            width: 60px;
+            height: 40px;
+            font-size: 16px;
+            color: black;
+            text-decoration: none;
+        }
+
+        .data {
+            height: 230px;
+        }
+
+        #sertitle {
+            float: right;
+            color: white;
+            margin-top: 50px;
+            padding: 0px 15px;
+        }
+
+        .card-body {
+            width: 1110px;
+        }
+
+        .card {
+            margin: 0px;
+            padding: 0px;
+            width: 1110px;
+        }
+    </style>
+    <!-- <link rel="stylesheet" href="{% static 'boardapp/detail.css' %}"> -->
 </head>
+
 <body>
-    <br>
-    <div class="container">
+
+    <div class="container" id="detail_all">
         <div class="aside">
             <h4 id="title">자료실</h4>
-            <h10 id="sertitle"> HOME > 자료실 > {{dataroom.subject}}</h10>
+            <h10 id="sertitle"> HOME > <span><a id="dataroomlink" href="{% url 'dataroom' %}">자료실</a></span> >
+                {{dataroom.subject}}</h10>
         </div>
         <div class="card">
             <div class="card-body">
-            <div class="data">
-                <div id="detail_sub">{{dataroom.subject}}</div>
-                <span id="detail_item" >{{dataroom.item}}</span>
-                <span id="detail_name" class="right">{{dataroom.name}}</span>
-                <span id="detail_year" class="right">{{dataroom.year}}</span>
-                <hr>
-                <div id="detail_title">{{dataroom.title}}</div>
-            </div>
+                <div class="data">
+                    <div id="detail_sub">{{dataroom.subject}}</div>
+                    <span id="detail_item">{{dataroom.item}}</span>
+                    <span id="detail_name" class="right">{{dataroom.author}}</span>
+                    <span id="detail_year" class="right">{{dataroom.year}}</span>
+                    <hr>
+                    <div id="detail_title">{{dataroom.title}}</div>
+                </div>
                 {%if user.username == dataroom.author.username%}
                 <a class="btn btn-light btn-sm" id="button" href="javascript:delete_confirm()" role="button">삭제</a>
-                <a class="btn btn-light btn-sm" id="button" href="{%url 'edit' dataroom.id%}" onclick="delect_confirm()" role="button">수정</a>
+                <a class="btn btn-light btn-sm" id="button" href="{%url 'edit' dataroom.id%}" onclick="delect_confirm()"
+                    role="button">수정</a>
                 {%else%}
                 <div class="none_display">
                     <button class="btn btn-light btn-sm" onclick="Unauthorized()">수정</button>
@@ -48,7 +162,9 @@
                 </div>
                 {%endif%}
                 {% if dataroom.upload_files %}
-                <a id="file" href="{% url 'file_download' dataroom.id %}">첨부파일 다운로드</a>
+                <div>
+                    <p id="file">첨부파일 다운로드<span><a id="file" href="{% url 'file_download' dataroom.id %}">{{dataroom.filename}}</a></span></p>
+                </div>
                 {%endif%}
             </div>
         </div>
