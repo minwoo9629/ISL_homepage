@@ -1,3 +1,4 @@
+import os
 from django.db import models
 from django.conf import settings
 from hitcount.models import HitCount, HitCountMixin
@@ -31,6 +32,11 @@ class DataRoom(models.Model,HitCountMixin):
       def hit_update_counter(self):
           self.hits = self.hits + 1
           self.save()
+
+      # 게시글 삭제 시 첨부파일도 삭제  
+      def delete(self, *args, **kargs):
+          if self.upload_files:
+              os.remove(os.path.join(settings.MEDIA_ROOT, self.upload_files.path))
 
 
     

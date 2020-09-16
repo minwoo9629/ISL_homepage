@@ -3,6 +3,9 @@
 {%load static%}
 
 <head>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="{% static 'boardapp/write.css' %}"> -->
     <script>
@@ -27,6 +30,10 @@
             width: 120px;
             margin-left: auto;
             margin-right: auto;
+        }
+
+        .table_td {
+            width: 150px;
         }
 
         #title {
@@ -82,12 +89,7 @@
                         <tr>
                             <th scope="row" class="table_th">항목</th>
                             <td>
-                                <div>
-                                    <!-- <select class="custom-select" id="inputGroup-sizing-sm" name="item">
-                                        <option name="middle">중간</option>
-                                        <option name="final">기말</option>
-                                        <option name="homework">과제</option>
-                                    </select> -->
+                                <div class="table_td">
                                     {{form.item}}
                                 </div>
                             </td>

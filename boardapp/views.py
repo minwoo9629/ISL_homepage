@@ -105,7 +105,7 @@ def edit(request, board_id):
     form = DataRoomForm(instance=board_detail)
     filename = board_detail.filename
     upload_files = board_detail.upload_files
-    return render(request, 'edit.html',{'dataroom':board_detail, 'form': form, 'filename': filename, 'upload_files':upload_files} )
+    return render(request, 'edit.html',{'dataroom':board_detail, 'form': form} )
 
 def file_download(request, pk):
     post = get_object_or_404(DataRoom, pk=pk)

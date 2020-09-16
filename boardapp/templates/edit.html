@@ -34,6 +34,10 @@
         #write {
             font-size: 16px;
         }
+
+        .table_td {
+            width: 150px;
+        }
     </style>
 </head>
 
@@ -60,14 +64,15 @@
                         <th scope="row" class="table_th">교수</th>
                         <td>
                             <div>
-                                <input style="width:20%;" type="text" name="edit_professor" value="{{form.professor.value}}"> * ex) 이지은(O) 이지은 교수님(X).
+                                <input style="width:20%;" type="text" name="edit_professor"
+                                    value="{{form.professor.value}}"> * ex) 이지은(O) 이지은 교수님(X).
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row" class="table_th">항목</th>
                         <td>
-                            <div>
+                            <div class="table_td">
                                 <!-- <select class="custom-select" id="inputGroup-sizing-sm" name="item" value="{{form.item.value}}">
                                     <option>중간</option>
                                     <option>기말</option>
@@ -95,22 +100,15 @@
                         <th scope="row" class="table_th">첨부파일</th>
                         <td>
                             <div class="form-group">
-                                {% if filename %}
-                                <script type="text/javascript">
-                                    $('[href="{{ file_url }}"]').html("{{ filename }}");
-                                    $('#upload_files-clear_id').css({ opacity: '100', position: 'relative', 'pointer-events': 'auto' })
-                                </script>
+                                {% if dataroom.filename %}
+                                <p>첨부파일 변경</p>
+                                {{form.upload_files}}
+                                <p id="file">현재:<span><a id="file" href="{% url 'file_download' dataroom.id %}">{{dataroom.filename}}</a></span></p>
+                                {%else%}
+                                <p>등록된 파일이 없습니다.</p>
+                                {{form.upload_files}}
                                 {%endif%}
                             </div>
-                            <div class="form-group">
-                                <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                            </div>
-                            <!-- <div class="input-group mb-3">
-                                <div class="custom-file">
-                                  <input type="file" class="custom-file-input" id="exampleFormControlFile1" aria-describedby="inputGroupFileAddon01">
-                                  <label class="custom-file-label" for="inputGroupFile01">파일 선택</label>
-                                </div>
-                            </div> -->
                         </td>
                     </tr>
                 </tbody>
@@ -118,5 +116,7 @@
             <input class="btn btn-dark" id="write" type="submit" value="수정하기">
         </form>
     </div>
+    <script>
+    </script>
 </body>
 {% endblock %}

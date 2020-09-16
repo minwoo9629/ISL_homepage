@@ -12,4 +12,5 @@ class DataRoomForm(forms.ModelForm):
             'upload_files' : forms.FileInput(attrs={'class':'board_form',}),
             'title' : forms.TextInput(attrs={'class':'board_form'}),
             'year' : forms.NumberInput(attrs={'class':'board_form'}),
+            'item' : forms.Select(attrs={'class':'form-control'}),
         }
