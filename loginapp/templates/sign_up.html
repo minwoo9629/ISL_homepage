@@ -1,3 +1,5 @@
+{%extends 'base.html'%}
+{% block contents %}
 {% load static %}
 <!doctype html>
 <html lang="en">
@@ -15,8 +17,8 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/sign-in/">
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" 
-    integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css"
+        integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
 
     <style>
         @media (min-width: 768px) {
@@ -26,7 +28,7 @@
         }
     </style>
     <script language="javascript">
-        function pop_close(){
+        function pop_close() {
             self.close();
         }
     </script>
@@ -35,49 +37,61 @@
 </head>
 
 <body class="text-center">
+    <h1 class="h3 mb-3 font-weight-normal">회원가입</h1>
+ 
+    <form class="form-signin" method="POST" action="{%url 'id_check'%}">
+        {% csrf_token %}
+        {{idcheck_form.username}}
+        {%if idcheck_form.username.errors%}
+            {{idcheck_form.username.errors}}
+        {%else%}
+            <li>사용하셔도 됩니다.</li>
+        {%endif%}
+        <!-- form에다가 IDform 활용해서 action 달고 POST id_check view 
+        중복이라면 view에서 error 메시지 확인하고 
+        중복이 아니라면 사용가능한 아이디입니다 라는 메시지를 띄운다--> 
+
+        <!-- ajax로 입력한 ID를 view에서 작업하고 Json 형태로 다시 ajax에서 처리함-->
+        <input class="btn btn-lg btn-primary btn-block" type="submit" name="id_check"" value="ID 중복확인">
+    </form>
     <form class="form-signin" method="POST" action="{%url 'sign_up'%}">
         {% csrf_token %}
-       
-        <h1 class="h3 mb-3 font-weight-normal">회원가입</h1>
-
-        <div>
-        {{signup_form.username}}
-            {{signup_form.username.errors}}
-            <input class="btn btn-lg btn-primary btn-block"type="submit" name="id_check" value="ID 중복 확인">
-                    
-        </div>
-        <br>
+        
+        {{signup_form.username}} <!-- hidden 옵션 주고 -->
+        {{signup_form.username.errors}}
+        
+        
         {{signup_form.password1}}
-        <br>
+
         {{signup_form.password2}}
         {{signup_form.password2.errors}}
-        <br>
+
         {{signup_form.name}}
-        <br>
-        {{signup_form.student_ID}}
-        <br>
-        {{signup_form.email}}
-        {{signup_form.email.errors}}
-        <br>
         
 
-       
-        <input class="btn btn-lg btn-primary btn-block"type="submit" name="id_check" value="회원가입">
+        {{signup_form.student_ID}}
+        
+
+        {{signup_form.email}}
+        {{signup_form.errors}}
+
+        <input class="btn btn-lg btn-primary btn-block" type="submit" name="sign_up" value="회원가입">
     </form>
 
 
- 
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script>
+        </script>
 
 
 </body>
 
 </html>
+{% endblock %}

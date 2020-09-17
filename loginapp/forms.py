@@ -8,7 +8,8 @@ class IDForm(forms.Form):
         widget=forms.TextInput(
             attrs={
                 'class':'form-control',
-                'placeholder':"ID"
+                'placeholder':"ID",
+                
                 
             }
         )
@@ -20,6 +21,15 @@ class IDForm(forms.Form):
         return username
 
 class PasswordForm(forms.Form):
+    username = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'class' : 'form-control',
+                'readonly' : 'readonly',
+                'hidden' : 'hidden'
+            } 
+        )
+    )
     password1 = forms.CharField(
         widget=forms.PasswordInput(
             attrs={
@@ -44,55 +54,6 @@ class PasswordForm(forms.Form):
             raise forms.ValidationError('비밀번호가 일치하지 않습니다.')
         return password2
     
-#class SignupForm(forms.Form):
-#     username = forms.CharField(
-#         widget=forms.TextInput(
-#             attrs={
-#                 'class':'form-control',
-#                 'placeholder':"ID"
-                
-#             }
-#         )
-#     )
-#     password1 = forms.CharField(
-#         widget=forms.PasswordInput(
-#             attrs={
-#                 'class': 'form-control',
-#                 'placeholder':"비밀번호"
-#             }
-#         )
-#     )
-#     password2 = forms.CharField(
-#         widget=forms.PasswordInput(
-#             attrs={
-#                 'class': 'form-control',
-#                 'placeholder':"비밀번호 확인"
-#             }
-#         )
-#     )
-
-#     def clean_username(self):
-#         username = self.cleaned_data['username']
-#         if User.objects.filter(username=username).exists():
-#             raise forms.ValidationError('아이디가 이미 사용중입니다.')
-#         return username
-
-#     def clean_password2(self):
-#         password1 = self.cleaned_data['password1']
-#         password2 = self.cleaned_data['password2']
-
-#         if password1 != password2:
-#             raise forms.ValidationError('비밀번호가 일치하지 않습니다.')
-#         return password2
-    
-
-#     def signup(self):
-#         if self.is_valid():
-#             return User.objects.create_user(
-#                 username=self.cleaned_data['username'],
-#                 password=self.cleaned_data['password2'],
-#             )
-
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
@@ -111,6 +72,14 @@ class ProfileForm(forms.ModelForm):
                 'placeholder' : 'email',
             }),
         }
+    def clean(self):
+        cleaned_data = super(ProfileForm, self).clean()
+        name = self.cleaned_data['name']
+        student_ID = self.cleaned_data['student_ID']
+        email = self.cleaned_data['email']
+        if not name or not student_ID or not email:
+            raise forms.ValidationError('빈칸을 확인하세요')
+        return cleaned_data
 
     def profile_save(self, username):
          if self.is_valid():
@@ -121,7 +90,11 @@ class ProfileForm(forms.ModelForm):
                student_ID= self.cleaned_data['student_ID']
                )
 
-class SignupForm(IDForm,PasswordForm,ProfileForm):
+class SignupForm(PasswordForm,ProfileForm):
+
+
+    def get_user_id(self,id):
+            self.username = id
 
     def signup(self):
         if self.is_valid():

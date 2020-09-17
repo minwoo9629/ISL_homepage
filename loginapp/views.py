@@ -5,36 +5,70 @@ from django.contrib import messages
 from django.contrib import auth
 #계정에 대한 권한
 from .models import Profile
-from .forms import SignupForm, ProfileForm
+from .forms import SignupForm, IDForm
 from django.db import transaction
+from django.urls import reverse
+from django.http import HttpResponseRedirect, HttpResponse
 
 # Create your views here.
 
 @transaction.atomic
-def sign_up(request):
+def sign_up(request, id=None):
+
     if request.method == 'POST':
+        #idcheck_form = IDForm(request.POST)
         signup_form = SignupForm(request.POST)
         #profile_form = ProfileForm(request.POST)
         if signup_form.is_valid(): #and profile_form.is_valid():
-            
+            #signup_form.get_user_id(id)
             signup_form.signup()
+            #필수로 넣을수 있게 만들어야함
             signup_form.profile_save(User.objects.get(username=signup_form.cleaned_data['username']))
-            return redirect('home')
+            return redirect('sign_in')
         else:
-            print(str(signup_form.is_valid())) #+ str(profile_form.is_valid()))
-            if 'ID 중복 확인' in request.POST:
-                signup_form.clean_username()
-                print('error')
+            #print(signup_form.errors)
+            idcheck_form = IDForm()
+            id = signup_form.cleaned_data['username']
+            idcheck_form.initial={'username':id}
+            print(id)
+            #print(signup_form.username)
+            print('un valid1')
+            return render(request,'sign_up.html', {'signup_form':signup_form, 'idcheck_form':idcheck_form})
+            
 
     else:
+        #print(id)
         signup_form=SignupForm()
+        idcheck_form = IDForm()
+        
+        #print(signup_form.username)
+        print('un valid2')
+        signup_form.initial={'username':id}
+        idcheck_form.initial={'username':id}
         #profile_form = ProfileForm()
     
-    return render(request,'sign_up.html', {'signup_form':signup_form,}) #'profile_form':profile_form})
+    return render(request,'sign_up.html', {'signup_form':signup_form, 'idcheck_form':idcheck_form}) #'profile_form':profile_form}) 
     # 실패하는경우 sign_up.html에 머문다.
 
 def id_check(request):
-    pass
+    if request.method == 'POST':
+        signup_form=SignupForm()
+        idcheck_form = IDForm(request.POST)
+        if idcheck_form.is_valid():
+            clean_id = idcheck_form.clean_username()
+            print('valid')
+            #print(clean_id)
+            return redirect('sign_up', id=clean_id)
+        else:
+            print('fail')
+            return render(request,'sign_up.html', {'signup_form':signup_form, 'idcheck_form':idcheck_form})
+            
+    else:
+        print('error')
+        
+        
+        return redirect('sign_up')
+
 def sign_in(request):
     if request.method == 'POST':
         username = request.POST['username']
