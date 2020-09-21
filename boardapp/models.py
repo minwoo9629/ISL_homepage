@@ -1,15 +1,29 @@
+import os
 from django.db import models
 from django.conf import settings
 from hitcount.models import HitCount, HitCountMixin
+from django.contrib.auth.models import User
+from datetime import datetime
+from uuid import uuid4
 # Create your models here.
 
-class DjangoBoard(models.Model,HitCountMixin):
-      subject = models.CharField(max_length=50, blank=True)
-      name = models.CharField(max_length=50, blank=True)
-      nick_name = models.CharField(max_length=50, blank=True)
-      created_date = models.DateField(null=True, blank=True)
-      memo = models.CharField(max_length=200, blank=True)
+def get_file_path(instance,filename):
+    ymd_path = datetime.now().strftime('%Y/%m/%d')
+    uuid_name = uuid4().hex
+    return '/'.join(['upload_file/', ymd_path, uuid_name])
+
+class DataRoom(models.Model,HitCountMixin):
+      ITEM_CHOCIES = (('중간','중간'),('기말','기말'),('과제','과제'))
+      subject = models.CharField(max_length=50, null=True, verbose_name="과목")
+      professor = models.CharField(max_length=10, null=True, verbose_name="교수")
+      item = models.CharField(max_length=10, null=True, verbose_name="항목", choices=ITEM_CHOCIES)
+      title = models.CharField(max_length=50, null=True, verbose_name="글 제목")
+      author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+      year = models.IntegerField()
       hits = models.IntegerField(default=0)
+      upload_files = models.FileField(upload_to=get_file_path, null=True, blank=True)
+      filename = models.CharField(max_length=64, null=True, verbose_name="파일 이름")
+
 
       def __str__(self):
           return self.subject
@@ -19,21 +33,10 @@ class DjangoBoard(models.Model,HitCountMixin):
           self.hits = self.hits + 1
           self.save()
 
-class SubBoard(models.Model):
-    subname = models.CharField(max_length=50, blank=True)
+      # 게시글 삭제 시 첨부파일도 삭제  
+      def delete(self, *args, **kargs):
+          if self.upload_files:
+              os.remove(os.path.join(settings.MEDIA_ROOT, self.upload_files.path))
 
-    def __str__(self):
-        return self.subname
 
-class DataroomBoard(models.Model):
-    sub = models.CharField(max_length=50, blank=True)
-    item = models.CharField(max_length=10)
-    name = models.CharField(max_length=50, blank=True)
-    year = models.DateField()
-
-class DataRoom(models.Model):
-    sub = models.CharField(max_length=50, blank=True)
-    item = models.CharField(max_length=10)
-    title = models.CharField(max_length=50, blank=True)
-    year = models.DateField()
-    name = models.CharField(max_length=50, blank=True)
+    

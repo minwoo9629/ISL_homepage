@@ -8,6 +8,9 @@
         #write{
             font-size: 16px;
         }
+        #board_container{
+            margin-top: 200px;
+        }
     </style>
 </head>
 <body>
@@ -27,7 +30,7 @@
                 <tr>
                     <td>{{board.id}}</td>
                     <td><a href="{% url 'detail' board.id%}">{{board.subject}}</a>{{board.comments.count}}</td>
-                    <td>{{board.name}}</td>
+                    <td>{{board.author}}</td>
                     <td>{{board.created_date}}</td>
                     <td>{{board.hits}}</td> 
                 </tr>
