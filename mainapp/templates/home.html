@@ -83,18 +83,54 @@
         </div>                    
     </div>
     <div class="container">
-    <table class="table">
-        <tr>
-        <th>#</th>
-        <th>컴퓨터 공학과 공지사항</th>
-        </tr>
-        {%for zip in zips%}
-        <tr>
-            <td>{{zip.0}}</td>
-            <td><a href={{zip.2}} target='_blank'>{{zip.1}}</a></td>
-        </tr>
-        {%endfor%}
-    </table>
+    
+    </div>
+    <div class="container">
+        <div class="row" id="card">
+            <div class="col-md-6">
+                <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-3 d-felx flex-column position-static">
+                        <h3>컴퓨터 공학과 공지사항</h3>
+            
+                        <table class="table">
+                            <tr>
+                            
+                            <th>제목</th>
+                            <th>등록일</th>
+                            </tr>
+                            {%for zip in com_zips%}
+                            <tr>
+                                
+                                <td><a href={{zip.1}} target='_blank'>{{zip.0}}</a></td>
+                                <td>{{zip.2}}</td>
+                            </tr>
+                            {%endfor%}
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-3 d-felx flex-column position-static">
+                        <h3>한밭대학교 공지사항</h3>
+                        <table class="table">
+                            <tr>
+                            <th>제목</th>
+                            <th>등록일</th>
+                            </tr>
+                            {%for zip in han_zips%}
+                            <tr>
+                                <td><a href={{zip.1}} target='_blank'>{{zip.0}}</a></td>
+                                <td>{{zip.2}}</td>
+                            </tr>
+                            {%endfor%}
+                        </table>
+                        
+                            
+                    </div>
+                </div> 
+            </div>    
+        </div>                    
     </div>
 </body>
 {% endblock %}
