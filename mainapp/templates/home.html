@@ -54,6 +54,10 @@
         margin:0px;
         padding:0px;
     }
+    #com_board{
+        font-family: 'YESGothic-Regular';
+        color:black;
+    }
     </style>
 </head>
 
@@ -63,8 +67,8 @@
         <div>
           <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
-              <div style="margin-top: 120px;">
-                <h1 id=title>Intelligent System Lap</h1>
+              <div style="margin-top: 160px;">
+                <h1 id=title>Intelligent System Lab</h1>
               </div>
             </div>
           </div>
@@ -72,7 +76,7 @@
       </header>
 
     <div class="container">
-        <div class="row" id="card">
+        <div class ="row" id="card">
             <div class="col-md-6">
                 <div
                     class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
@@ -105,9 +109,18 @@
         </div>
     </div>
     <div class="container">
-        <table class="table">
-            <th>테이블</th>
-        </table>
+    <table class="table" id="com_board">
+        <tr>
+        <th>#</th>
+        <th>컴퓨터공학과 공지사항</th>
+        </tr>
+        {%for zip in zips%}
+        <tr id="com_board">
+            <td id="com_board" style="color:black;">{{zip.0}}</td>
+            <td id="com_board"><a href={{zip.2}} target='_blank' style="color:black;">{{zip.1}}</a></td>
+        </tr>
+        {%endfor%}
+    </table>
     </div>
 </body>
 {% endblock %}

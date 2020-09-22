@@ -19,11 +19,14 @@ urlpatterns = [
     path('edit/<int:board_id>/',boardapp.views.edit,name="edit"),
     path('delete/<int:board_id>/',boardapp.views.delete,name="delete"),
     path('sign_up',loginapp.views.sign_up,name="sign_up"),
+    path('sign_up/<id>', loginapp.views.sign_up, name='sign_up'),
     path('sign_in',loginapp.views.sign_in,name="sign_in"),
     path('logout',loginapp.views.logout, name="logout"),
     path('dataroom/', boardapp.views.dataroom, name="dataroom"),
     path('download/<int:pk>', boardapp.views.file_download, name="file_download"),
     path('search/', boardapp.views.search, name="search"),
     # path('accounts/',include('allauth.urls')),
+    path('idcheck/', loginapp.views.id_check, name='id_check'),
+    
 ]
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

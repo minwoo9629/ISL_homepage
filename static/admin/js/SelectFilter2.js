@@ -175,7 +175,7 @@ Requires core.js and SelectBox.js.
             SelectFilter.refresh_icons(field_id);
         },
         any_selected: function(field) {
-<<<<<<< HEAD
+
             var any_selected = false;
             try {
                 // Temporarily add the required attribute and check validity.
@@ -187,12 +187,12 @@ Requires core.js and SelectBox.js.
                 any_selected = field.find('option:selected').length > 0;
             }
             field.removeAttr('required');
-=======
+
             // Temporarily add the required attribute and check validity.
             field.required = true;
             const any_selected = field.checkValidity();
             field.required = false;
->>>>>>> park
+
             return any_selected;
         },
         refresh_icons: function(field_id) {
