@@ -34,18 +34,18 @@ def home(request):
 
     com_list = []
     han_list = []
-    for i in range(len(com_titles)):
+    for i in range(5):
         link = com_titles[i].get('onclick').split(sep='\'', maxsplit=1)[1]
         link = link.split(sep='\'', maxsplit=1)[0]
         link = 'https://www.hanbat.ac.kr/bbs/BBSMSTR_000000000333/view.do?nttId=' + link + '&mno=sub05_01'
         com_list.append((com_titles[i].text, link, com_dates[i].text))
         #print(com_list)
-    
-    for i in range(len(han_titles)):
-        
+    #https://www.hanbat.ac.kr/bbs/BBSMSTR_000000000050/view.do?nttId=B000000078305Ap3fF7a&mno=sub07_01
+    for i in range(5):
+        i = i+3
         link = han_titles[i].get('onclick').split(sep='\'', maxsplit=1)[1]
         link = link.split(sep='\'', maxsplit=1)[0]
-        link = 'https://www.hanbat.ac.kr/bbs/BBSMSTR_000000000333/view.do?nttId=' + link + '&mno=sub07_01'
+        link = 'https://www.hanbat.ac.kr/bbs/BBSMSTR_000000000050/view.do?nttId=' + link + '&mno=sub07_01'
         han_list.append((han_titles[i].text, link, han_dates[i].text))
     return render(request,'home.html', {'com_zips' : com_list, 'han_zips':han_list})
 

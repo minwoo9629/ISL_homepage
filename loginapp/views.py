@@ -30,24 +30,22 @@ def sign_up(request, id=None):
             idcheck_form = IDForm()
             id = signup_form.cleaned_data['username']
             idcheck_form.initial={'username':id}
-            print(id)
+            #print(id)
             #print(signup_form.username)
-            print('un valid1')
+            #print('un valid1')
             return render(request,'sign_up.html', {'signup_form':signup_form, 'idcheck_form':idcheck_form})
-            
-
     else:
         #print(id)
         signup_form=SignupForm()
         idcheck_form = IDForm()
         
         #print(signup_form.username)
-        print('un valid2')
+        #print('un valid2')
         signup_form.initial={'username':id}
         idcheck_form.initial={'username':id}
         #profile_form = ProfileForm()
     
-    return render(request,'sign_up.html', {'signup_form':signup_form, 'idcheck_form':idcheck_form}) #'profile_form':profile_form}) 
+    return render(request,'sign_up.html', {'signup_form':signup_form, 'idcheck_form':idcheck_form, 'check':id}) #'profile_form':profile_form}) 
     # 실패하는경우 sign_up.html에 머문다.
 
 def id_check(request):

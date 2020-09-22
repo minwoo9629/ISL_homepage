@@ -25,6 +25,7 @@ urlpatterns = [
     path('dataroom/', boardapp.views.dataroom, name="dataroom"),
     path('download/<int:pk>', boardapp.views.file_download, name="file_download"),
     path('search/', boardapp.views.search, name="search"),
+    path('id_check', loginapp.views.id_check, name="id_check")
     # path('accounts/',include('allauth.urls')),
 ]
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

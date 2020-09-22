@@ -62,24 +62,20 @@ class ProfileForm(forms.ModelForm):
             'name' : forms.TextInput(attrs={
                 'class' : 'form-control',
                 'placeholder' : '이름',
+                'required' : 'required'
             }),
             'student_ID' : forms.TextInput(attrs={
                 'class' : 'form-control',
                 'placeholder' : '학번',
+                'required' : 'required'
             }),
             'email' : forms.TextInput(attrs={
                 'class' : 'form-control',
                 'placeholder' : 'email',
+                'required' : 'required'
             }),
         }
-    def clean(self):
-        cleaned_data = super(ProfileForm, self).clean()
-        name = self.cleaned_data['name']
-        student_ID = self.cleaned_data['student_ID']
-        email = self.cleaned_data['email']
-        if not name or not student_ID or not email:
-            raise forms.ValidationError('빈칸을 확인하세요')
-        return cleaned_data
+
 
     def profile_save(self, username):
          if self.is_valid():
