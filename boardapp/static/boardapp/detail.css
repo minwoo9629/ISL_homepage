@@ -1,63 +1,115 @@
-@font-face { font-family: 'YESGothic-Regular'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_13@1.0/YESGothic-Regular.woff') format('woff'); font-weight: normal; font-style: normal; }
+#but {
+    color: black;
+    text-decoration-line: none;
+}
+
+#dataroomlink {
+    color: white;
+    text-decoration-line: none;
+}
+
+@font-face {
+    font-family: 'YESGothic-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_13@1.0/YESGothic-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 #detail_title {
     font-family: 'YESGothic-Regular';
     font-weight: bold;
     font-size: 18px;
-    padding:10px;
+    padding: 10px;
 }
-#title{
-font-family: 'YESGothic-Regular';
-margin-top: 25px;
-margin-left:50px;
-color:white;
+
+#title {
+    font-family: 'YESGothic-Regular';
+    float: left;
+    font-size: 40px;
+    margin-top: 20px;
+    margin-left: 60px;
+    color: white;
 }
+
 .none_display {
     display: none;
 }
-body{
-        font-size: 16px;
-    }
-#write{
-        font-size: 16px;
-    }
+
+body {
+    font-family: 'YESGothic-Regular';
+    font-size: 16px;
+}
+
+#write {
+    font-size: 16px;
+}
+
 #detail_sub {
     font-family: 'YESGothic-Regular';
     font-weight: bold;
-    font-size:24px;
-    padding:5px 10px; 
+    font-size: 24px;
+    padding: 5px 10px;
 }
+
 #detail_item {
     font-family: 'YESGothic-Regular';
-    padding:10px; 
+    padding: 10px;
 }
-.right{
+
+.right {
     font-family: 'YESGothic-Regular';
-    float:right;
-    padding:5px;
+    float: right;
+    padding: 5px;
 }
-#button{
-    float:right;
-    margin:5px;
-    width:60px;
-    height:40px;
-    font-size:16px;
-    color:black;
-    text-decoration:none;
+
+#file {
+    padding-left: 10px;
 }
-#file{
-    padding:10px;
+
+.aside {
+    margin-left: 0px;
+    height: 90px;
+    background-color: darkslategray;
 }
-.data{
-    height:230px;
+
+#detail_all {
+    margin-top: 80px;
 }
-.aside{
-margin-left:0px;
-height:90px;
-background-color:darkslategray;
+
+#detail_title {
+    font-family: 'YESGothic-Regular';
+    font-weight: bold;
+    font-size: 18px;
+    padding: 10px;
 }
-#sertitle{
-    float:right;
-    color:white;
-    margin-top:50px;
-    padding:0px 15px;
+
+#button {
+    float: right;
+    margin: 5px;
+    width: 60px;
+    height: 40px;
+    font-size: 16px;
+    color: black;
+    text-decoration: none;
+}
+
+.data {
+    height: 230px;
+}
+
+#sertitle {
+    float: right;
+    color: white;
+    margin-top: 50px;
+    padding: 0px 15px;
+}
+
+.card-body {
+    width: 1110px;
+}
+
+.card {
+    margin: 0px;
+    padding: 0px;
+    width: 1110px;
 }

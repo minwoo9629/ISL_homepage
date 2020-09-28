@@ -175,24 +175,10 @@ Requires core.js and SelectBox.js.
             SelectFilter.refresh_icons(field_id);
         },
         any_selected: function(field) {
-
-            var any_selected = false;
-            try {
-                // Temporarily add the required attribute and check validity.
-                // This is much faster in WebKit browsers than the fallback.
-                field.attr('required', 'required');
-                any_selected = field.is(':valid');
-            } catch (e) {
-                // Browsers that don't support :valid (IE < 10)
-                any_selected = field.find('option:selected').length > 0;
-            }
-            field.removeAttr('required');
-
             // Temporarily add the required attribute and check validity.
             field.required = true;
             const any_selected = field.checkValidity();
             field.required = false;
-
             return any_selected;
         },
         refresh_icons: function(field_id) {

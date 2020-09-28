@@ -25,23 +25,67 @@
                 font-size: 3.5rem;
             }
         }
+        .card {
+            position: absolute;
+            top: 30%;
+            left: 38%;
+            height: 250px;
+            width: 400px;
+            margin:0 auto;
+            padding:0;
+            /* margin-top:150px;
+            margin-right:1000px;
+            margin-left:300px; */
+        }
+        .title{
+            margin-left: 32%;
+            margin-bottom:50px;
+            margin-top:20px;
+            color:white;
+        }
+        .tit{
+            background-color: darkslategray;
+            height:80px;
+            width:100%;
+        }
+        .btn{
+            border: 1px solid black;
+            background-color: rgba(0,0,0,0); 
+            color: black; 
+            padding: 5px;
+        }
+        #sign {
+            width: 100%;
+            margin:0 auto;
+            margin-top: 10px;
+        }
+        .tab{
+            width:100%;
+        }
+        .signin{
+            width:90%;
+        }
+        .form-control{
+            margin-top:10px;
+        }
     </style>
     <!-- Custom styles for this template -->
     <link href="{% static 'css/signin.css'%}" rel="stylesheet">
 </head>
 
-<body class="text-center">
-    <form class="form-signin" method="POST" action="{%url 'sign_in'%}">
+<body class="card">
+    <div class="tit"><h1 class="title">로그인</h1></div>
+    <form class="signin" method="POST" action="{%url 'sign_in'%}">
         {% csrf_token %}
-        
-        <h1 class="h3 mb-3 font-weight-normal">로그인 해주세요</h1>
+        <table class ="tab">
         <label for="inputEmail" class="sr-only">ID</label>
-        <input type="text" name="username" id="inputEmail" class="form-control" value="" placeholder="ID" required
-            autofocus>
+        <tr><input type="text" name="username" id="inputEmail" class="form-control" value="" placeholder="ID" required
+            autofocus></tr>
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" name="password" id="inputPassword" class="form-control" value="" placeholder="Password"
-            required>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
+        <tr><input type="password" name="password" id="inputPassword" class="form-control" value="" placeholder="Password"
+            required></tr>
+        </table>
+        <button class="btn btn-block" id="sign" type="submit">로그인</button>
         {% if messages %}
         {% for message in messages %}
         {{ message.tags }}

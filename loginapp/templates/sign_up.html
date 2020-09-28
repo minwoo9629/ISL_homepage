@@ -18,70 +18,47 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css"
         integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
 
-    <style>
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-        .card{
-            position:absolute;
-            top:20%;
-            left:35%;
-            height:450px;
-            /* margin-top:150px;
-            margin-right:1000px;
-            margin-left:300px; */
-        }
-        .title{
-        }
-        .ID{
-        }
-        #sign{
-            width:100%;
-        }
-        #id_check{
-            margin-bottom:30px;
-        }
-    </style>
-    <script language="javascript">
-        function pop_close() {
-            self.close();
-        }
-    </script>
+   
     <!-- Custom styles for this template -->
-    <!-- <link href="{% static 'css/signin.css'%}" rel="stylesheet"> -->
+    <link href="{% static 'css/signin.css'%}" rel="stylesheet">
 </head>
 
 <body class="card">
-    <h1 class="title">회원가입</h1>
- 
+    <div class="tit"><h1 class="title">회원가입</h1></div>
+
     <form method="POST" action="{%url 'id_check'%}">
-        <table>
-        {% csrf_token %}
-        <tr>
-            <td style='width:120px'>ID</td>
-            <td>{{idcheck_form.username}}
-                {%if idcheck_form.username.errors%}
-                {{idcheck_form.username.errors}}
-            {%else%}
-                <li>사용하셔도 됩니다.</li>
-            {%endif%}
-            </td>
-            <td><input class="btn btn-lg btn-primary btn-block" type="submit" name="id_check" value="ID 중복확인"></td>
-        </tr>
-        <!-- form에다가 IDform 활용해서 action 달고 POST id_check view 
+        <table class="tab">
+            {% csrf_token %}
+            <tr>
+                <td style='width:120px'>ID</td>
+                <td>
+                        <div class="input-group">
+                            {{idcheck_form.username}}
+                            <span class="input-group-btn">
+                                <input class="btn"
+                                type="submit" name="id_check" value="ID 중복확인">
+                            </span>
+                        </div>
+                    {%if idcheck_form.username.errors%}
+                                {{idcheck_form.username.errors}}
+                            {%elif check != None%}
+                                <li>사용하셔도 됩니다.</li>
+                            {%endif%}
+
+                </td>
+            </tr>
+            <!-- form에다가 IDform 활용해서 action 달고 POST id_check view 
         중복이라면 view에서 error 메시지 확인하고 
-        중복이 아니라면 사용가능한 아이디입니다 라는 메시지를 띄운다--> 
-        <!-- ajax로 입력한 ID를 view에서 작업하고 Json 형태로 다시 ajax에서 처리함-->
+        중복이 아니라면 사용가능한 아이디입니다 라는 메시지를 띄운다-->
+            <!-- ajax로 입력한 ID를 view에서 작업하고 Json 형태로 다시 ajax에서 처리함-->
     </form>
-    <form class="" method="POST" action="{%url 'sign_up'%}">
+    <form method="POST" action="{%url 'sign_up'%}">
         {% csrf_token %}
         <tr>
             <td>{{signup_form.username}}</td> <!-- hidden 옵션 주고 -->
-            <td>{{signup_form.username.errors}}</td>
+
         </tr>
-        
+
         <tr>
             <td style='width:120px'>비밀번호</td>
             <td>{{signup_form.password1}}</td>
@@ -89,8 +66,8 @@
 
         <tr>
             <td style='width:120px'>비밀번호 확인</td>
-            <td>{{signup_form.password2}}</td>
-                {{signup_form.password2.errors}}
+            <td>{{signup_form.password2}}{{signup_form.password2.errors}}</td>
+
         </tr>
         <tr>
             <td style='width:120px'>이름</td>
@@ -103,13 +80,14 @@
         </tr>
         <tr>
             <td style='width:120px'>이메일</td>
-            <td>{{signup_form.email}}</td>
-        {{signup_form.errors}}
+            <td>{{signup_form.email}}{{signup_form.errors}}</td>
+            
         </tr>
         </table>
-            <input class="btn btn-lg btn-primary btn-block" id="sign" type="submit" name="sign_up" value="회원가입">
-            <button class="btn btn-lg btn-primary btn-block"><a href="{%url 'home' %}" style="color:white;text-decoration: none;">회원가입 취소</a></button>
+        <input class="btn btn-block" id="sign" type="submit" name="sign_up" value="회원가입">
+        <button class="btn btn-block" id="sign"><a href="{%url 'home' %}" style="color:balck;text-decoration: none;">회원가입 취소</a></button>
     </form>
+    
 
 
 

@@ -1,13 +1,5 @@
 /*!
-<<<<<<< HEAD
-<<<<<<< HEAD
- * Select2 4.0.7
-=======
  * Select2 4.0.13
->>>>>>> park
-=======
- * Select2 4.0.13
->>>>>>> seo
  * https://select2.github.io
  *
  * Released under the MIT license
@@ -840,16 +832,8 @@ S2.define('select2/utils',[
     if (Utils.__cache[id] != null) {
       delete Utils.__cache[id];
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
     element.removeAttribute('data-select2-id');
->>>>>>> park
-=======
-
-    element.removeAttribute('data-select2-id');
->>>>>>> seo
   };
 
   return Utils;
@@ -1500,20 +1484,8 @@ S2.define('select2/selection/base',[
       self.$selection.removeAttr('aria-activedescendant');
       self.$selection.removeAttr('aria-owns');
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-      window.setTimeout(function () {
-        self.$selection.focus();
-      }, 0);
-    
-=======
       self.$selection.trigger('focus');
 
->>>>>>> park
-=======
-      self.$selection.trigger('focus');
-
->>>>>>> seo
       self._detachCloseHandler(container);
     });
 
@@ -1703,12 +1675,6 @@ S2.define('select2/selection/single',[
     var formatted = this.display(selection, $rendered);
 
     $rendered.empty().append(formatted);
-<<<<<<< HEAD
-<<<<<<< HEAD
-    $rendered.attr('title', selection.title || selection.text);
-=======
-=======
->>>>>>> seo
 
     var title = selection.title || selection.text;
 
@@ -1717,10 +1683,6 @@ S2.define('select2/selection/single',[
     } else {
       $rendered.removeAttr('title');
     }
-<<<<<<< HEAD
->>>>>>> park
-=======
->>>>>>> seo
   };
 
   return SingleSelection;
@@ -1823,13 +1785,6 @@ S2.define('select2/selection/multiple',[
       var formatted = this.display(selection, $selection);
 
       $selection.append(formatted);
-<<<<<<< HEAD
-<<<<<<< HEAD
-      $selection.attr('title', selection.title || selection.text);
-
-=======
-=======
->>>>>>> seo
 
       var title = selection.title || selection.text;
 
@@ -1837,10 +1792,6 @@ S2.define('select2/selection/multiple',[
         $selection.attr('title', title);
       }
 
-<<<<<<< HEAD
->>>>>>> park
-=======
->>>>>>> seo
       Utils.StoreData($selection[0], 'data', selection);
 
       $selections.push($selection);
@@ -1980,15 +1931,7 @@ S2.define('select2/selection/allowClear',[
       }
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-    this.$element.trigger('change');
-=======
     this.$element.trigger('input').trigger('change');
->>>>>>> park
-=======
-    this.$element.trigger('input').trigger('change');
->>>>>>> seo
 
     this.trigger('toggle', {});
   };
@@ -2011,15 +1954,7 @@ S2.define('select2/selection/allowClear',[
       return;
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-    var removeAll = this.options.get('translations').get('removeAllItems');   
-=======
     var removeAll = this.options.get('translations').get('removeAllItems');
->>>>>>> park
-=======
-    var removeAll = this.options.get('translations').get('removeAllItems');
->>>>>>> seo
 
     var $remove = $(
       '<span class="select2-selection__clear" title="' + removeAll() +'">' +
@@ -2048,15 +1983,7 @@ S2.define('select2/selection/search',[
       '<li class="select2-search select2-search--inline">' +
         '<input class="select2-search__field" type="search" tabindex="-1"' +
         ' autocomplete="off" autocorrect="off" autocapitalize="none"' +
-<<<<<<< HEAD
-<<<<<<< HEAD
-        ' spellcheck="false" role="textbox" aria-autocomplete="list" />' +
-=======
         ' spellcheck="false" role="searchbox" aria-autocomplete="list" />' +
->>>>>>> park
-=======
-        ' spellcheck="false" role="searchbox" aria-autocomplete="list" />' +
->>>>>>> seo
       '</li>'
     );
 
@@ -2233,21 +2160,7 @@ S2.define('select2/selection/search',[
 
     this.resizeSearch();
     if (searchHadFocus) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-      var isTagInput = this.$element.find('[data-select2-tag]').length;
-      if (isTagInput) {
-        // fix IE11 bug where tag input lost focus
-        this.$element.focus();
-      } else {
-        this.$search.focus();
-      }
-=======
       this.$search.trigger('focus');
->>>>>>> park
-=======
-      this.$search.trigger('focus');
->>>>>>> seo
     }
   };
 
@@ -4170,15 +4083,7 @@ S2.define('select2/dropdown/search',[
       '<span class="select2-search select2-search--dropdown">' +
         '<input class="select2-search__field" type="search" tabindex="-1"' +
         ' autocomplete="off" autocorrect="off" autocapitalize="none"' +
-<<<<<<< HEAD
-<<<<<<< HEAD
-        ' spellcheck="false" role="textbox" />' +
-=======
         ' spellcheck="false" role="searchbox" aria-autocomplete="list" />' +
->>>>>>> park
-=======
-        ' spellcheck="false" role="searchbox" aria-autocomplete="list" />' +
->>>>>>> seo
       '</span>'
     );
 
@@ -4232,30 +4137,16 @@ S2.define('select2/dropdown/search',[
       self.$search.removeAttr('aria-activedescendant');
 
       self.$search.val('');
-<<<<<<< HEAD
-<<<<<<< HEAD
-      self.$search.blur();
-=======
       self.$search.trigger('blur');
->>>>>>> park
-=======
-      self.$search.trigger('blur');
->>>>>>> seo
     });
 
     container.on('focus', function () {
       if (!container.isOpen()) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-        self.$search.focus();
-=======
         self.$search.trigger('focus');
->>>>>>> park
-=======
-        self.$search.focus();
-        self.$search.trigger('focus');
->>>>>>> seo
       }
+    });
+
+    container.on('results:all', function (params) {
       if (params.query.term == null || params.query.term === '') {
         var showSearch = self.showSearch(params);
 
