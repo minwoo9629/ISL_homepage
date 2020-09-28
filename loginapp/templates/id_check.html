@@ -1,0 +1,52 @@
+{%extends 'base.html'%}
+{% block contents %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <title>Signin</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/sign-in/">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" 
+    integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
+
+    <style>
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+    <script language="javascript">
+        function pop_close(){
+            self.close();
+        }
+    </script>
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/signin.css'%}" rel="stylesheet">
+</head>
+<body>
+    <!-- <form class="form-idcheck" method="POST" action="{%url 'id_check'%}">
+        {% csrf_token %}  
+
+            {{idcheck_form.username}}
+            {{idcheck_form.username.errors}}
+        
+        <input class="btn btn-lg btn-primary btn-block"type="submit" name="id_check" value="아이디 중복확인">
+     
+    </form> -->
+
+</body>
+</html>
+
+{% endblock %}
