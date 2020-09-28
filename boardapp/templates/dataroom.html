@@ -261,8 +261,6 @@
     <input type="hidden" id="item" name="item" value="{{item|default_if_none:''}}">
     <input type="hidden" id="year" name="year"value="{{year|default_if_none:''}}">
     <input type="hidden" id="page" name="page" value="{{page}}" value="{{kw|default_if_none:''}}">
-
-    <input type="hidden" id="page" name="page" value="{{page}}" value="">
   </form>
 
   <!-- Modal -->
@@ -288,7 +286,7 @@
                 <th>선택</th>
               </thead>
               <tbody>
-                {%for board in board_list%}
+                {%for board in boards%}
                 <tr>
                   <td>{{board.subject}}</td>
                   <td>{{board.professor}}</td>

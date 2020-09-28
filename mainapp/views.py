@@ -47,5 +47,10 @@ def home(request):
         link = link.split(sep='\'', maxsplit=1)[0]
         link = 'https://www.hanbat.ac.kr/bbs/BBSMSTR_000000000050/view.do?nttId=' + link + '&mno=sub07_01'
         han_list.append((han_titles[i].text, link, han_dates[i].text))
-    return render(request,'home.html', {'com_zips' : com_list, 'han_zips':han_list})
+
+    if request.user.groups.values().exists():
+        user_group = request.user.groups.values()[0]['name']
+    else:
+        user_group = None
+    return render(request,'home.html', {'com_zips' : com_list, 'han_zips':han_list, 'user_group':user_group})
 
