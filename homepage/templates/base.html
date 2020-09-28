@@ -1,4 +1,5 @@
 {% load static %}
+{% load custom_tags %}
 <!doctype html>
 <html lang="en">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -8,7 +9,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <meta charset="utf-8">
   <title>ISL PAGE</title>
-<!-- 
+  <!-- 
   <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/blog/"> -->
 
   <!-- Bootstrap core CSS -->
@@ -19,61 +20,66 @@
   <!-- <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet"> -->
   <!-- <link rel="stylesheet" href="{% static 'mainapp/css/menu.css' %}"> -->
   <style>
-    .navbar{
+    .navbar {
       border-bottom: 1px solid lightgray;
     }
-    .navbar-brand{
+
+    .navbar-brand {
       font-family: 'GmarketSansBold';
       font-size: 24px;
       color: darkslategrey;
     }
-    .navbar-brand:hover{
-      color:teal;
-    }
-    .nav-link{
-      font-family: 'GoyangDeogyang';
-      font-size: 18px;
-      color:rgb(72, 117, 117);
-      margin-left: 15px;
-      margin-right: 20px;
-      display:block;
-      float : right;
-    }
-    .nav-link:hover{
-      color:teal;
-    }
-    #mainNav{
-        background:white;
-        height:54px;
-        width:1500px;
-        margin:0 auto;
-        padding:0 auto;
-      }
-      
-    h6{
-      color:white;
+
+    .navbar-brand:hover {
+      color: teal;
     }
 
-    #navbarDropdown{
+    .nav-link {
+      font-family: 'GoyangDeogyang';
+      font-size: 18px;
+      color: rgb(72, 117, 117);
+      margin-left: 15px;
+      margin-right: 20px;
+      display: block;
+      float: right;
+    }
+
+    .nav-link:hover {
+      color: teal;
+    }
+
+    #mainNav {
+      background: white;
+      height: 54px;
+      width: 1500px;
+      margin: 0 auto;
+      padding: 0 auto;
+    }
+
+    h6 {
+      color: white;
+    }
+
+    #navbarDropdown {
       color: darkslategrey;
     }
-    
-    #login{
+
+    #login {
       font-family: 'GoyangIlsan';
-      color:darkslategray;
-      font-size:14px;
-      text-decoration:none;
+      color: darkslategray;
+      font-size: 14px;
+      text-decoration: none;
       position: relative;
-      bottom:-3px;
+      bottom: -3px;
       margin-right: -1px;
-      float:right;
+      float: right;
     }
-    
+
     #image {
       margin-right: 5px;
       border-radius: 0%;
       position: absolute;
-      margin-top:10px;
+      margin-top: 10px;
     }
 
     @font-face {
@@ -111,73 +117,79 @@
         font-size: 3.5rem;
       }
     }
-    #I_S_L{
-      position:absolute;
-      margin-left:30px;
+
+    #I_S_L {
+      position: absolute;
+      margin-left: 30px;
     }
-    html, body{
-      width:100%;
-      height:100%;
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
       margin: 0;
       padding: 0;
     }
-    #outer-menu{
-      list-style-type:none;
-      margin-right:150px;
+
+    #outer-menu {
+      list-style-type: none;
+      margin-right: 150px;
     }
-    body{
-      margin-top:-10px;
+
+    body {
+      margin-top: -10px;
     }
-    .logo{
-      margin-top:15px;
-      margin-left:220px;
+
+    .logo {
+      margin-top: 15px;
+      margin-left: 220px;
     }
-    .hr{
-      margin-top:-5px;
+
+    .hr {
+      margin-top: -5px;
     }
   </style>
 </head>
 
 <body>
   <div class="nav_bar">
-  <nav id="mainNav">
-    <div class=logo>
-      <img src="{% static 'mainapp/img/logo.jpg'%}" id="image">
-      <a class="navbar-brand" id="I_S_L" href="{%url 'home' %}">I.S.L</a>
-    </div>
-    <div class="" id="navbarResponsive">
-      <ul class="" id="outer-menu">
-        {% if user.is_active%}
-        <li><a class="btn-sm btn-outline-light" id="login"
-            href="javascript:{document.getElementById('logout').submit()}">LOGOUT</a></li>
-        <li><a class="btn-sm btn-outline-light" id="login" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">{{ user.username }} 로그인 중</a></li>
-        <form id="logout" method="POST" action="{%url 'logout'%}">
-          {%csrf_token%}<input type="hidden" />
-        </form>
-        {% else %}
-        <li><a class="btn-sm btn-outline-light" id="login" href="{%url 'sign_up'%}">회원가입</a></li>
-        <li><a class="btn-outline-light btn-sm" id="login" href="{%url 'sign_in'%}">로그인</a></li>
-        {% endif %}
-        <li class="nav-item">
-          <a class="nav-link" id="dataroom_link" href="{%url 'dataroom' %}">자료실</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{%url 'home' %}">랩실소개</a>
-        </li>
-        <script>
-          $(document).ready(function () {
-            $('#dataroom_link').click(function (e) {
-              e.preventDefault();
-              var user_group = "{{user_group}}";
-              if (user_group == "ISL_USER") {
-                window.location = "{%url 'dataroom' %}"
-              }
-              else {
+    <nav id="mainNav">
+      <div class=logo>
+        <img src="{% static 'mainapp/img/logo.jpg'%}" id="image">
+        <a class="navbar-brand" id="I_S_L" href="{%url 'home' %}">I.S.L</a>
+      </div>
+      <div class="" id="navbarResponsive">
+        <ul class="" id="outer-menu">
+          {% if user.is_active%}
+          <li><a class="btn-sm btn-outline-light" id="login"
+              href="javascript:{document.getElementById('logout').submit()}">LOGOUT</a></li>
+          <li><a class="btn-sm btn-outline-light" id="login" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">{{ user.username }} 로그인 중</a></li>
+          <form id="logout" method="POST" action="{%url 'logout'%}">
+            {%csrf_token%}<input type="hidden" />
+          </form>
+          {% else %}
+          <li><a class="btn-sm btn-outline-light" id="login" href="{%url 'sign_up'%}">회원가입</a></li>
+          <li><a class="btn-outline-light btn-sm" id="login" href="{%url 'sign_in'%}">로그인</a></li>
+          {% endif %}
+          <li class="nav-item">
+            {% if user|has_group:"ISL_USER"%}
+            <a class="nav-link" href="{%url 'dataroom' %}">자료실</a>
+            {%else%}
+            <a class="nav-link" id="dataroom_link" href="{%url 'dataroom' %}">자료실</a>
+            {% endif %}
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'home' %}">랩실소개</a>
+          </li>
+
+          <script>
+            $(document).ready(function () {
+              $('#dataroom_link').click(function (e) {
+                e.preventDefault();
                 alert("랩실원만 열람 가능합니다!");
-              }
+              });
             });
-          });
           </script>
         </ul>
       </div>
@@ -186,4 +198,5 @@
   {% block contents %}
   {%endblock%}
 </body>
+
 </html>
