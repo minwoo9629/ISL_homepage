@@ -12,7 +12,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',mainapp.views.home, name="home"),
     path('board/', boardapp.views.board, name="board"),
-    path('dataroom/', boardapp.views.dataroom, name="dataroom"),
     path('write', boardapp.views.write, name="write"),
     path('create', boardapp.views.create, name="create"),
     path('dataroom/<int:board_id>/',boardapp.views.detail,name="detail"),
