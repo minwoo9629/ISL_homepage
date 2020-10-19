@@ -8,7 +8,7 @@ class IDForm(forms.Form):
         widget=forms.TextInput(
             attrs={
                 'class':'form-control',
-                'placeholder':"ID",
+                # 'placeholder':"ID",
                 
                 
             }
@@ -34,7 +34,7 @@ class PasswordForm(forms.Form):
         widget=forms.PasswordInput(
             attrs={
                 'class': 'form-control',
-                'placeholder':"비밀번호"
+                # 'placeholder':"비밀번호"
             }
         )
     )
@@ -42,7 +42,7 @@ class PasswordForm(forms.Form):
         widget=forms.PasswordInput(
             attrs={
                 'class': 'form-control',
-                'placeholder':"비밀번호 확인"
+                # 'placeholder':"비밀번호 확인"
             }
         )
     )

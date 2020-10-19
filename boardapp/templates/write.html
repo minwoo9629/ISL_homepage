@@ -3,11 +3,11 @@
 {%load static%}
 
 <head>
+    <link rel="stylesheet" href="{% static 'boardapp/write.css' %}">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- <link rel="stylesheet" href="{% static 'boardapp/write.css' %}"> -->
     <script>
         function cancle_confirm(url) {
             var cancle = confirm('글 작성을 취소할까요?');
@@ -17,44 +17,8 @@
         }
     </script>
     <style>
-        body {
-            font-size: 16px;
-        }
-
-        #write_all {
-            margin-top: 80px;
-            font-size: 16px;
-        }
-
-        .table_th {
-            width: 120px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
         .table_td {
             width: 150px;
-        }
-
-        #title {
-            font-family: 'YESGothic-Regular';
-            float: left;
-            font-size: 40px;
-            margin-top: 20px;
-            margin-left: 60px;
-            color: white;
-        }
-
-        .aside {
-            margin-left: 0px;
-            height: 90px;
-            background-color: darkslategray;
-        }
-
-        .custom-select {
-            width: 24%;
-            height: 40px;
-            font-size: 16px;
         }
     </style>
 </head>

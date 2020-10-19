@@ -1,0 +1,53 @@
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+.card {
+    position: absolute;
+    top: 20%;
+    left: 35%;
+    height: 470px;
+    width: 500px;
+    /* margin-top:150px;
+    margin-right:1000px;
+    margin-left:300px; */
+}
+
+.btn{
+    border: 1px solid black;
+    background-color: rgba(0,0,0,0); 
+    color: black; 
+    padding: 5px;
+}
+#sign {
+    width: 85%;
+    margin:0 auto;
+    margin-top: 10px;
+}
+
+#id_check {
+    margin-bottom: 30px;
+}
+a{
+color: black;
+}
+a:hover{
+    text-decoration: none;
+    color: gray;
+}
+.title{
+    margin-left: 30%;
+    margin-bottom:50px;
+    margin-top:20px;
+    color:white;
+}
+.tit{
+    background-color: darkslategray;
+    height:100px;
+}
+.tab{
+    margin: 0 auto;
+    margin-top:10px;
+}
